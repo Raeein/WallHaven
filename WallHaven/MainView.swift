@@ -16,8 +16,9 @@ struct MainView: View {
                 .tabItem { Label("Home", systemImage: "house.fill") }
                 .tag(1)
 
-            Text("Tab Content 2")
-                .tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/ }.tag(2)
+            SettingsView()
+                .tabItem { Label("Settings", systemImage: "gear") }
+                .tag(2)
         })
         .background(.black)
         .foregroundStyle(.black)

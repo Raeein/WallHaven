@@ -17,6 +17,11 @@
 		27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AE2B12CD8E0002F08C /* SearchView.swift */; };
 		27D190B22B12CDE60002F08C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B12B12CDE60002F08C /* HomeView.swift */; };
 		27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B32B12D3A90002F08C /* Wallpaper.swift */; };
+		27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF43FE2B1F744100361BBC /* SettingsView.swift */; };
+		27DF44022B1F783700361BBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF44012B1F783700361BBC /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		27DF44042B1F787200361BBC /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44032B1F787200361BBC /* KeychainHelper.swift */; };
+		27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44052B1F7A2400361BBC /* APIKeyView.swift */; };
+		27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 27DF44082B200E3000361BBC /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,10 @@
 		27D190AE2B12CD8E0002F08C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		27D190B12B12CDE60002F08C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		27D190B32B12D3A90002F08C /* Wallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
+		27DF43FE2B1F744100361BBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		27DF44012B1F783700361BBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		27DF44032B1F787200361BBC /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		27DF44052B1F7A2400361BBC /* APIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */,
+				27DF44022B1F783700361BBC /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +60,7 @@
 			children = (
 				27D190992B12C9F80002F08C /* WallHaven */,
 				27D190982B12C9F80002F08C /* Products */,
+				27DF44002B1F783700361BBC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +75,7 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
+				27DF43FD2B1F742200361BBC /* Settings */,
 				27D190B02B12CDA60002F08C /* SwiftDataExample */,
 				27D190AA2B12CBF50002F08C /* MainView.swift */,
 				27D190B12B12CDE60002F08C /* HomeView.swift */,
@@ -72,6 +85,7 @@
 				27D190A02B12C9F90002F08C /* Assets.xcassets */,
 				27D190A22B12C9F90002F08C /* Preview Content */,
 				27D190B32B12D3A90002F08C /* Wallpaper.swift */,
+				27DF44032B1F787200361BBC /* KeychainHelper.swift */,
 			);
 			path = WallHaven;
 			sourceTree = "<group>";
@@ -93,6 +107,23 @@
 			path = SwiftDataExample;
 			sourceTree = "<group>";
 		};
+		27DF43FD2B1F742200361BBC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				27DF43FE2B1F744100361BBC /* SettingsView.swift */,
+				27DF44052B1F7A2400361BBC /* APIKeyView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		27DF44002B1F783700361BBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27DF44012B1F783700361BBC /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +140,9 @@
 			dependencies = (
 			);
 			name = WallHaven;
+			packageProductDependencies = (
+				27DF44082B200E3000361BBC /* KeychainAccess */,
+			);
 			productName = WallHaven;
 			productReference = 27D190972B12C9F80002F08C /* WallHaven.app */;
 			productType = "com.apple.product-type.application";
@@ -137,6 +171,9 @@
 				Base,
 			);
 			mainGroup = 27D1908E2B12C9F80002F08C;
+			packageReferences = (
+				27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = 27D190982B12C9F80002F08C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,6 +203,9 @@
 				27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */,
 				27D190B22B12CDE60002F08C /* HomeView.swift in Sources */,
 				27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */,
+				27DF44042B1F787200361BBC /* KeychainHelper.swift in Sources */,
+				27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */,
+				27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */,
 				27D190AB2B12CBF50002F08C /* MainView.swift in Sources */,
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
@@ -376,6 +416,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27DF44082B200E3000361BBC /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27D1908F2B12C9F80002F08C /* Project object */;
 }

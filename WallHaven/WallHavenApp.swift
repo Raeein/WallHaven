@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct WallHavenApp: App {
+    @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
 //    var sharedModelContainer: ModelContainer = {
 //        let schema = Schema([
 //            Item.self,
@@ -26,6 +27,7 @@ struct WallHavenApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
         }
 //        .modelContainer(sharedModelContainer)
     }
