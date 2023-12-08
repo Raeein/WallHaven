@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  WallHaven
-//
-//  Created by Raeein Bagheri on 2023-12-05.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
@@ -38,4 +31,6 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+        .previewDevice(PreviewDevice(rawValue: "iPhone 15"))
+
 }

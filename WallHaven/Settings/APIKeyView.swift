@@ -1,24 +1,37 @@
-//
-//  APIKeyView.swift
-//  WallHaven
-//
-//  Created by Raeein Bagheri on 2023-12-05.
-//
-
 import SwiftUI
+import KeychainAccess
 
 struct APIKeyView: View {
     
     func saveAPIKey(password: String) -> Bool {
-        
         guard let data = password.data(using: .utf8) else { return false }
-        
-        return KeychainHelper.storeData(data: data, forService: KeychainHelper.service, account: KeychainHelper.account)
+        return true
     }
-
+    
+    func loadAPIKey() -> String {
+        return "123"
+    }
+    
+    func saveButtonPressed() {
+        print("Current password cant be empty")
+        
+        if isEditingAPIKeyFocused {
+            if saveAPIKey(password: currentPassword) {
+                print("Save to keychain")
+                currentPassword = password
+            } else {
+                print("Failed to save to key chain")
+            }
+        } else {
+            isEditingAPIKeyFocused.toggle()
+        }
+    }
+    
     @State private var password: String = ""
     @State private var currentPassword: String = ""
     @FocusState private var isEditingAPIKeyFocused: Bool
+    
+    let keychain = Keychain(service: Constants.KeyChain.Service)
     
     
     var body: some View {
@@ -43,38 +56,28 @@ struct APIKeyView: View {
                                 .autocorrectionDisabled()
                                 .truncationMode(.tail)
                         }
-                     }
+                    }
                 }
             }
-            .onAppear(perform: {
-                password = ""
-            })
             .toolbar(content: {
-                Button {
-                    if currentPassword == "" {
-                        print("Current password cant be empty")
-                        return
-                    }
-                    if isEditingAPIKeyFocused {
-                        if saveAPIKey(password: currentPassword) {
-                            print("Save to keychain")
-                            currentPassword = password
-                        } else {
-                            print("Failed to save to key chain")
-                        }
-                    } else {
-                        isEditingAPIKeyFocused.toggle()
-                    }
+                ToolbarItem(placement: .topBarTrailing, content: {
+                    Button("save", action: saveButtonPressed)
+                        .foregroundStyle(isEditingAPIKeyFocused && currentPassword != "" ? .blue : .gray)
+                        .disabled(isEditingAPIKeyFocused && currentPassword != "" ? false : true)
                     
-                } label: {
-                    Text(isEditingAPIKeyFocused ? "Save" : "Edit")
-                }
+                })
+                
             })
             .navigationTitle("API Config")
         }
+        .onAppear(perform: {
+            password = loadAPIKey()
+//            keychain.get(<#T##key: String##String#>)
+        })
     }
 }
 
 #Preview {
     APIKeyView()
+        .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
 }
