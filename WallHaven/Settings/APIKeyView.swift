@@ -2,78 +2,132 @@ import SwiftUI
 import KeychainAccess
 
 struct APIKeyView: View {
-    
-    func saveAPIKey(password: String) -> Bool {
-        guard let data = password.data(using: .utf8) else { return false }
-        return true
-    }
-    
-    func loadAPIKey() -> String {
-        return "123"
-    }
-    
-    func saveButtonPressed() {
-        print("Current password cant be empty")
-        
-        if isEditingAPIKeyFocused {
-            if saveAPIKey(password: currentPassword) {
-                print("Save to keychain")
-                currentPassword = password
-            } else {
-                print("Failed to save to key chain")
-            }
-        } else {
-            isEditingAPIKeyFocused.toggle()
-        }
-    }
-    
-    @State private var password: String = ""
-    @State private var currentPassword: String = ""
-    @FocusState private var isEditingAPIKeyFocused: Bool
+    @FocusState private var isEditingAPIKey: Bool
+    @State private var apiKey: String = ""
+    @State private var apiKeyField: String = ""
+    @State private var showingChangePasswordAlert = false
     
     let keychain = Keychain(service: Constants.KeyChain.Service)
-    
     
     var body: some View {
         NavigationStack {
             Form {
                 Section("API Key") {
-                    HStack {
-                        if !password.isEmpty {
-                            Text("Your Key")
-                            Spacer()
-                            SecureField("Field", text: $password)
-                                .multilineTextAlignment(.trailing)
-                                .textContentType(.password)
-                                .disabled(true)
-                        } else {
-                            Text("Enter your Key")
-                            Spacer()
-                            TextField("Placeholder", text: $currentPassword, axis: .horizontal)
-                                .focused($isEditingAPIKeyFocused)
-                                .multilineTextAlignment(.trailing)
-                                .textContentType(.password)
-                                .autocorrectionDisabled()
-                                .truncationMode(.tail)
-                        }
+                    if apiKey.isEmpty {
+                        apiKeyEntryField
+                    } else {
+                        apiKeyDisplayField
+                        
                     }
                 }
             }
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarTrailing, content: {
-                    Button("save", action: saveButtonPressed)
-                        .foregroundStyle(isEditingAPIKeyFocused && currentPassword != "" ? .blue : .gray)
-                        .disabled(isEditingAPIKeyFocused && currentPassword != "" ? false : true)
-                    
-                })
-                
-            })
             .navigationTitle("API Config")
+            .toolbar {
+                saveToolbarItem
+            }
+            .alert(isPresented: $showingChangePasswordAlert) {
+                changePasswordAlert
+            }
+            .onAppear(perform: loadAPIKey)
         }
-        .onAppear(perform: {
-            password = loadAPIKey()
-//            keychain.get(<#T##key: String##String#>)
-        })
+    }
+    
+    var apiKeyEntryField: some View {
+        HStack {
+            Text("Enter your Key")
+            Spacer()
+            TextField("Placeholder", text: $apiKeyField)
+                .focused($isEditingAPIKey)
+                .multilineTextAlignment(.trailing)
+                .textContentType(.password)
+                .autocorrectionDisabled()
+                .truncationMode(.head)
+        }
+    }
+    
+    var apiKeyDisplayField: some View {
+        HStack {
+            Text("Your Key")
+            Spacer()
+            SecureField("Field", text: $apiKey)
+                .multilineTextAlignment(.trailing)
+                .textContentType(.password)
+                .overlay(
+                    Rectangle()
+                        .foregroundColor(Color.red.opacity(0.001)) //
+                        .onTapGesture {
+                            showingChangePasswordAlert = true
+                        }
+                )
+        }
+    }
+    
+    var saveToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button("save") {
+                saveAPIKey()
+            }
+            .foregroundStyle(isEditingAPIKey && !apiKeyField.isEmpty ? .blue : .gray)
+            .disabled(isEditingAPIKey && !apiKeyField.isEmpty ? false : true)
+            
+        }
+    }
+    
+    var changePasswordAlert: Alert {
+        Alert(
+            title: Text("Change API Key"),
+            message: Text("Would you like to change your API Key?"),
+            primaryButton: .default(Text("Yes")) {
+                clearAPIKey()
+                apiKey = ""
+            },
+            secondaryButton: .cancel()
+        )
+    }
+    
+    private func saveAPIKey() {
+        guard !apiKeyField.isEmpty else { return }
+        performKeychainOperation {
+            try keychain
+                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
+                .authenticationPrompt("Authenticate to save your API Key")
+                .set(apiKeyField, key: Constants.KeyChain.Key)
+            
+            loadAPIKey()
+        }
+    }
+    
+    private func clearAPIKey() {
+        performKeychainOperation {
+            try keychain
+                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
+                .authenticationPrompt("Authenticate to delete your API Key")
+                .remove(Constants.KeyChain.Key)
+        }
+    }
+    
+    private func loadAPIKey() {
+        performKeychainOperation {
+            let storedApiKey = try keychain
+                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
+                .authenticationPrompt("Authenticate to retrieve your API Key")
+                .get(Constants.KeyChain.Key)
+            DispatchQueue.main.async {
+                apiKey = storedApiKey ?? ""
+            }
+        }
+    }
+    
+    private func performKeychainOperation(operation: @escaping () throws -> Void) {
+        DispatchQueue.global().async {
+            do {
+                try operation()
+            } catch {
+                DispatchQueue.main.async {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
