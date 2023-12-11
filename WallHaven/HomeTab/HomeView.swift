@@ -46,20 +46,7 @@ struct HomeView: View {
                     ForEach(wallpapers.sorted(by: { $0.id < $1.id }), id: \.self) { wallpaper in
                         
                         NavigationLink {
-                            ZStack {
-                                Circle()
-                                    .fill(.red)
-                                AsyncImage(url: URL(string: wallpaper.path))
-                                    .scaledToFit()
-                                
-                                Spacer()
-                                HStack {
-                                    Text("Save")
-                                    Spacer()
-                                    Text("Download")
-                                }
-                            }
-                            
+                            ImageView(wallpaper: wallpaper)
                         } label: {
                             AsyncImage(url: URL(string: wallpaper.thumbs.small)) { phase in
                                 switch phase {

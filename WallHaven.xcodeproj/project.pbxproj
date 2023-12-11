@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
+		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
+		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
+		279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6D2B278EF90082ACD1 /* ImageView.swift */; };
 		27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909A2B12C9F80002F08C /* WallHavenApp.swift */; };
 		27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909C2B12C9F80002F08C /* ContentView.swift */; };
 		27D1909F2B12C9F80002F08C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909E2B12C9F80002F08C /* Item.swift */; };
@@ -25,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
+		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
+		279D4B6D2B278EF90082ACD1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		27D190972B12C9F80002F08C /* WallHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27D1909A2B12C9F80002F08C /* WallHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHavenApp.swift; sourceTree = "<group>"; };
 		27D1909C2B12C9F80002F08C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,9 +63,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		279D4B692B27731A0082ACD1 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				279D4B652B2649560082ACD1 /* TestView.swift */,
+				279D4B672B2770780082ACD1 /* PannableImageView.swift */,
+				279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		279D4B6C2B278EE80082ACD1 /* HomeTab */ = {
+			isa = PBXGroup;
+			children = (
+				27D190B12B12CDE60002F08C /* HomeView.swift */,
+				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
+			);
+			path = HomeTab;
+			sourceTree = "<group>";
+		};
 		27D1908E2B12C9F80002F08C = {
 			isa = PBXGroup;
 			children = (
+				279D4B692B27731A0082ACD1 /* Tests */,
 				27D190992B12C9F80002F08C /* WallHaven */,
 				27D190982B12C9F80002F08C /* Products */,
 				27DF44002B1F783700361BBC /* Frameworks */,
@@ -78,7 +106,7 @@
 				27DF43FD2B1F742200361BBC /* Settings */,
 				27D190B02B12CDA60002F08C /* SwiftDataExample */,
 				27D190AA2B12CBF50002F08C /* MainView.swift */,
-				27D190B12B12CDE60002F08C /* HomeView.swift */,
+				279D4B6C2B278EE80082ACD1 /* HomeTab */,
 				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
 				27D190AC2B12CD790002F08C /* MoreView.swift */,
 				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
@@ -200,12 +228,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */,
+				279D4B662B2649560082ACD1 /* TestView.swift in Sources */,
 				27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */,
+				279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */,
 				27D190B22B12CDE60002F08C /* HomeView.swift in Sources */,
 				27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */,
 				27DF44042B1F787200361BBC /* KeychainHelper.swift in Sources */,
 				27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */,
 				27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */,
+				279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */,
 				27D190AB2B12CBF50002F08C /* MainView.swift in Sources */,
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
@@ -347,7 +379,8 @@
 				DEVELOPMENT_TEAM = HG79K3YA5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -377,7 +410,8 @@
 				DEVELOPMENT_TEAM = HG79K3YA5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
