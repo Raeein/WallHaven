@@ -53,7 +53,42 @@ struct ImageViewTest: View {
     }
 }
 
+struct TestViewContextMenu: View {
+    
+    var body: some View {
+        HStack {
+            // Other views
+            Text("Example View 1")
 
+            // Button, that when tapped shows 3 options
+            Menu {
+                Button(action: {
+                    
+                }) {
+                    Label("Add", systemImage: "plus.circle")
+                }
+                Button(action: {
+                    
+                }) {
+                    Label("Delete", systemImage: "minus.circle")
+                }
+                Button(action: {
+                    
+                }) {
+                    Label("Edit", systemImage: "pencil.circle")
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+        }
+        .frame(width: 300, height: 300, alignment: .center)
+    }
+}
+
+
+//#Preview {
+//    ImageViewTest()
+//}
 #Preview {
-    ImageViewTest()
+    TestViewContextMenu()
 }

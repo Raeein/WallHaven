@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  WallHaven
-//
-//  Created by Raeein Bagheri on 2023-11-25.
-//
-
 import SwiftUI
 
 struct HomeView: View {

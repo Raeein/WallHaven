@@ -1,13 +1,6 @@
-//
-//  MainView.swift
-//  WallHaven
-//
-//  Created by Raeein Bagheri on 2023-11-25.
-//
-
 import SwiftUI
 
-struct MainView: View {
+struct RootView: View {
     @State var selectedTab = 0
     var body: some View {
         TabView(selection: $selectedTab,
@@ -15,10 +8,14 @@ struct MainView: View {
             HomeView()
                 .tabItem { Label("Home", systemImage: "house.fill") }
                 .tag(1)
+            
+            SearchView()
+                .tabItem { Label("Search", systemImage: "magnifyingglass") }
+                .tag(2)
 
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gear") }
-                .tag(2)
+                .tag(3)
         })
         .background(.black)
         .foregroundStyle(.black)
@@ -28,5 +25,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    RootView()
 }

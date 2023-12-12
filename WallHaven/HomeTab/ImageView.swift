@@ -1,5 +1,9 @@
 import SwiftUI
 
+import Photos
+
+
+
 struct ImageView: View {
     
     init(wallpaper: Wallpaper, currentImage: UIImage? = nil) {
@@ -8,12 +12,37 @@ struct ImageView: View {
     
     func saveImage(imageToSave: UIImage?) {
         guard let imageToSave = imageToSave else { return }
-        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        let imageSaver = ImageSaver()
+        imageSaver.writeToPhotoAlbum(image: imageToSave)
     }
     
+    func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { newStatus in
+                if newStatus == .authorized || newStatus == .limited {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        case .restricted, .denied:
+            completion(false)
+        case .authorized, .limited:
+            completion(true)
+        @unknown default:
+            completion(false)
+        }
+    }
+
+    
     private let wallpaper: Wallpaper
+    private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
     @State private var currentImage: UIImage?
     @State private var showToast = false
+    @State private var showAlert = false
+    @State private var imageSaved = false
     
     var body: some View {
         ZStack(alignment: .center) { // Align the content to the bottom
@@ -27,31 +56,40 @@ struct ImageView: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .frame(maxWidth: .infinity)
                         .aspectRatio(contentMode: .fill)
                         .clipped()
                         .containerRelativeFrame(.horizontal)
+                        .ignoresSafeArea(.all)
                         .onAppear(perform: {
                             currentImage = ImageRenderer(content: image).uiImage
                         })
-                        .ignoresSafeArea(.all)
+                        
                 @unknown default:
                     fatalError()
                 }
             }
             
-            VStack{
-                Spacer()
+            VStack {
                 if showToast {
-                    Text("Image successfully saved to photos!")
-                        .foregroundStyle(.gray)
-                        .transition(.move(edge: .bottom))
+                    Label("Image successfully saved to photos", systemImage: "info.circle")
+                        .padding()
+                        .transition(.scale)
+                        .background(.blue)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(10)
                 }
+                Spacer()
                 HStack {
                     Button(action: {
-                        saveImage(imageToSave: currentImage)
-                        withAnimation(.easeInOut) {
-                            showToast.toggle()
+                        checkPhotoLibraryPermission { canSave in
+                            if canSave {
+                                saveImage(imageToSave: currentImage)
+                                withAnimation(.easeInOut) {
+                                    showToast.toggle()
+                                }
+                            } else {
+                                showAlert = true
+                            }
                         }
                     }) {
                         ImageViewTabItem(imageName: "arrow.down.circle", imageNameDesc: "Download")
@@ -77,6 +115,11 @@ struct ImageView: View {
                 .background(.ultraThinMaterial)
             }
         }
+        .alert(alertMessage, isPresented: $showAlert) {
+            Button("Dismiss", role: .cancel) {
+                        showAlert = false
+                    }
+                }
         .toolbar(.hidden, for: .tabBar)
         .onChange(of: showToast, {
             if showToast == true {

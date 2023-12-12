@@ -11,19 +11,19 @@
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
 		279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6D2B278EF90082ACD1 /* ImageView.swift */; };
+		279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6F2B2799140082ACD1 /* ImageSaver.swift */; };
 		27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909A2B12C9F80002F08C /* WallHavenApp.swift */; };
 		27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909C2B12C9F80002F08C /* ContentView.swift */; };
 		27D1909F2B12C9F80002F08C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909E2B12C9F80002F08C /* Item.swift */; };
 		27D190A12B12C9F90002F08C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D190A02B12C9F90002F08C /* Assets.xcassets */; };
 		27D190A42B12C9F90002F08C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D190A32B12C9F90002F08C /* Preview Assets.xcassets */; };
-		27D190AB2B12CBF50002F08C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AA2B12CBF50002F08C /* MainView.swift */; };
-		27D190AD2B12CD790002F08C /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AC2B12CD790002F08C /* MoreView.swift */; };
+		27D190AB2B12CBF50002F08C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AA2B12CBF50002F08C /* RootView.swift */; };
 		27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AE2B12CD8E0002F08C /* SearchView.swift */; };
 		27D190B22B12CDE60002F08C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B12B12CDE60002F08C /* HomeView.swift */; };
 		27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B32B12D3A90002F08C /* Wallpaper.swift */; };
 		27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF43FE2B1F744100361BBC /* SettingsView.swift */; };
 		27DF44022B1F783700361BBC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF44012B1F783700361BBC /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		27DF44042B1F787200361BBC /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44032B1F787200361BBC /* KeychainHelper.swift */; };
+		27DF44042B1F787200361BBC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44032B1F787200361BBC /* Constants.swift */; };
 		27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44052B1F7A2400361BBC /* APIKeyView.swift */; };
 		27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 27DF44082B200E3000361BBC /* KeychainAccess */; };
 /* End PBXBuildFile section */
@@ -33,20 +33,20 @@
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
 		279D4B6D2B278EF90082ACD1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		279D4B6F2B2799140082ACD1 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		27D190972B12C9F80002F08C /* WallHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27D1909A2B12C9F80002F08C /* WallHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHavenApp.swift; sourceTree = "<group>"; };
 		27D1909C2B12C9F80002F08C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		27D1909E2B12C9F80002F08C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		27D190A02B12C9F90002F08C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27D190A32B12C9F90002F08C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		27D190AA2B12CBF50002F08C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		27D190AC2B12CD790002F08C /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		27D190AA2B12CBF50002F08C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		27D190AE2B12CD8E0002F08C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		27D190B12B12CDE60002F08C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		27D190B32B12D3A90002F08C /* Wallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
 		27DF43FE2B1F744100361BBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		27DF44012B1F783700361BBC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		27DF44032B1F787200361BBC /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		27DF44032B1F787200361BBC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		27DF44052B1F7A2400361BBC /* APIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +78,7 @@
 			children = (
 				27D190B12B12CDE60002F08C /* HomeView.swift */,
 				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
+				279D4B6F2B2799140082ACD1 /* ImageSaver.swift */,
 			);
 			path = HomeTab;
 			sourceTree = "<group>";
@@ -85,7 +86,7 @@
 		27D1908E2B12C9F80002F08C = {
 			isa = PBXGroup;
 			children = (
-				279D4B692B27731A0082ACD1 /* Tests */,
+				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
 				27D190992B12C9F80002F08C /* WallHaven */,
 				27D190982B12C9F80002F08C /* Products */,
 				27DF44002B1F783700361BBC /* Frameworks */,
@@ -103,17 +104,16 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
+				27D190AA2B12CBF50002F08C /* RootView.swift */,
 				27DF43FD2B1F742200361BBC /* Settings */,
 				27D190B02B12CDA60002F08C /* SwiftDataExample */,
-				27D190AA2B12CBF50002F08C /* MainView.swift */,
 				279D4B6C2B278EE80082ACD1 /* HomeTab */,
 				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
-				27D190AC2B12CD790002F08C /* MoreView.swift */,
-				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
+				27D190B32B12D3A90002F08C /* Wallpaper.swift */,
+				27DF44032B1F787200361BBC /* Constants.swift */,
 				27D190A02B12C9F90002F08C /* Assets.xcassets */,
 				27D190A22B12C9F90002F08C /* Preview Content */,
-				27D190B32B12D3A90002F08C /* Wallpaper.swift */,
-				27DF44032B1F787200361BBC /* KeychainHelper.swift */,
+				279D4B692B27731A0082ACD1 /* Tests */,
 			);
 			path = WallHaven;
 			sourceTree = "<group>";
@@ -234,15 +234,15 @@
 				279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */,
 				27D190B22B12CDE60002F08C /* HomeView.swift in Sources */,
 				27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */,
-				27DF44042B1F787200361BBC /* KeychainHelper.swift in Sources */,
+				27DF44042B1F787200361BBC /* Constants.swift in Sources */,
 				27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */,
 				27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */,
 				279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */,
-				27D190AB2B12CBF50002F08C /* MainView.swift in Sources */,
+				27D190AB2B12CBF50002F08C /* RootView.swift in Sources */,
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
-				27D190AD2B12CD790002F08C /* MoreView.swift in Sources */,
+				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +381,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -412,6 +413,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

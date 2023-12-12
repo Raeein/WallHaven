@@ -1,10 +1,3 @@
-//
-//  Wallpaper.swift
-//  WallHaven
-//
-//  Created by Raeein Bagheri on 2023-11-25.
-//
-
 import Foundation
 
 struct WallpaperResponse: Codable {

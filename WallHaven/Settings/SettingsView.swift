@@ -6,7 +6,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section(header: Text("PREFRENCES")                               .font(.subheadline)
-                    .foregroundStyle(.gray), content: {
+                    .foregroundColor(.secondary), content: {
                     HStack{
                         Image(systemName: isDarkModeEnabled ? "moon.fill" : "moon")
                             
