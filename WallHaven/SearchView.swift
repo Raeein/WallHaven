@@ -2,64 +2,59 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var searchText = ""
-    @State private var selectedSearchItem: String?
     @State private var isPopularSearchesExpanded = true
     @State private var isRecentSearchesExpanded = true
+    @State private var isSearchBarPresented = false
     
     private var popularSearches = [
         "First",
         "Second",
-        "Third",
         "Third"
     ]
     
-    private var recentSearches = [
-        "First",
-        "Second",
-        "Third",
-        "Third"
+    @State private var recentSearches = [
+        "Fourth",
+        "Fifth",
+        "Sixth"
     ]
     
     var body: some View {
         NavigationStack {
-            if searchText.isEmpty {
-                VStack(alignment: .leading, content: {
- 
-//                    List(popularSearches, id: \.self, selection: $selectedSearchItem) { item in
-//                             Text(item)
-//                                 .onTapGesture {
-//                                     selectedSearchItem = item
-//                                 }
-//                         }
-                    
-                    List {
-                        
-                        Section("Popular searches", isExpanded: $isPopularSearchesExpanded) {
-                            ForEach(popularSearches, id: \.self) { section in
-                                Text(section)
+            VStack(alignment: .leading) {
+                List {
+                    Section("Popular searches", isExpanded: $isPopularSearchesExpanded) {
+                        ForEach(popularSearches, id: \.self) { item in
+                            NavigationLink(destination: Text("Detail View for \(item)")) {
+                                Text(item)
                             }
                         }
-                        
-                        Section("Recent searches", isExpanded: $isRecentSearchesExpanded) {
-                                ForEach(recentSearches, id: \.self) { section in
-                                    Text(section)
-                                    
-                                }
-                        }
                     }
-                    .listStyle(.sidebar)
                     
-//                    Spacer()
-//                    Text("Searching for \(searchText)")
-//                        .navigationTitle("Search")
-                })
-//                .background(.red)
+                    Section("Recent searches", isExpanded: $isRecentSearchesExpanded) {
+                        ForEach(recentSearches, id: \.self) { item in
+                            NavigationLink(destination: Text("Detail View for \(item)")) {
+                                Text(item)
+                            }
+                        }
+                        .onDelete(perform: { indexSet in
+                            recentSearches.remove(atOffsets: indexSet)
+                        })
+                    }
+                }
+                .listStyle(.sidebar)
             }
-         }
-         .searchable(text: $searchText)
+            
+            .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
+            .onSubmit(of: .search) {
+                // Handle the search action here
+                print("Searching for \(searchText)")
+            }
+        }
     }
 }
 
-#Preview {
-    SearchView()
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+    }
 }

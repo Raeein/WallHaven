@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var wallpapers: Set<Wallpaper> = Set()
+    @State private var wallpapers = [Wallpaper]()
     
     private let cellWidth = UIScreen.main.bounds.width
     private let cellHeight = UIScreen.main.bounds.height
+    private let apiService = APIService()
     
     @State private var columns = [
         GridItem(.flexible(), spacing: 1),
@@ -12,31 +13,12 @@ struct HomeView: View {
         GridItem(.flexible(), spacing: 1),
     ]
     
-    
-    func getRecommendations() {
-        Task {
-            do {
-                let url = URL(string: "https://wallhaven.cc/api/v1/search")!
-                let (data, _) = try await URLSession.shared.data(from: url)
-                let response = try JSONDecoder().decode(WallpaperResponse.self, from: data)
-                
-                for wallpaper in response.data {
-                    wallpapers.insert(wallpaper)
-                }
-                
-            } catch  {
-                wallpapers = []
-                print(error)
-            }
-        }
-    }
-    
     var body: some View {
         
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 1) {
-                    ForEach(wallpapers.sorted(by: { $0.id < $1.id }), id: \.self) { wallpaper in
+                    ForEach(wallpapers, id: \.self) { wallpaper in
                         
                         NavigationLink {
                             ImageView(wallpaper: wallpaper)
@@ -54,9 +36,9 @@ struct HomeView: View {
                                         .cornerRadius(8)
                                 case .failure:
                                     Text("Failed")
-                                        .onAppear(perform: {
-                                            self.wallpapers.remove(wallpaper)
-                                        })
+//                                        .onAppear(perform: {
+//                                            self.wallpapers.remove(wallpaper)
+//                                        })
                                 case .success(let image):
                                     image
                                         .resizable()
@@ -88,8 +70,9 @@ struct HomeView: View {
                 }
                 .font(.largeTitle)
             })
-            .onAppear(perform: getRecommendations)
-            
+            .task {
+                wallpapers = await apiService.getRecommendations()
+            }
         }
     }
 }

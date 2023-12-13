@@ -1,13 +1,19 @@
 import SwiftUI
-
 import Photos
-
-
 
 struct ImageView: View {
     
     init(wallpaper: Wallpaper, currentImage: UIImage? = nil) {
         self.wallpaper = wallpaper
+    }
+    
+    private func openPrivacySettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     func saveImage(imageToSave: UIImage?) {
@@ -115,11 +121,16 @@ struct ImageView: View {
                 .background(.ultraThinMaterial)
             }
         }
-        .alert(alertMessage, isPresented: $showAlert) {
-            Button("Dismiss", role: .cancel) {
-                        showAlert = false
-                    }
-                }
+        .alert("Enable Access", isPresented: $showAlert, actions: {
+            Button("Take Me There", role: .cancel) {
+                openPrivacySettings()
+            }
+            Button("Dismiss", role: .destructive) {
+                showAlert = false
+            }
+        }, message: {
+            Text(alertMessage)
+        })
         .toolbar(.hidden, for: .tabBar)
         .onChange(of: showToast, {
             if showToast == true {
