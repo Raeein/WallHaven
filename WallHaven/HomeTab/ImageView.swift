@@ -90,6 +90,7 @@ struct ImageView: View {
                         checkPhotoLibraryPermission { canSave in
                             if canSave {
                                 saveImage(imageToSave: currentImage)
+                                imageSaved.toggle()
                                 withAnimation(.easeInOut) {
                                     showToast.toggle()
                                 }
@@ -141,6 +142,7 @@ struct ImageView: View {
                 }
             }
         })
+        .sensoryFeedback(.success, trigger: imageSaved)
     }
 }
 

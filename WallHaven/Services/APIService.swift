@@ -1,6 +1,5 @@
 import Foundation
 
-
 struct APIService {
     func getRecommendations() async -> [Wallpaper] {
         var wallpapers = [Wallpaper]()
@@ -19,7 +18,7 @@ struct APIService {
     }
     
     func verifyAPIKey() -> Bool {
-        return false
+        return true
     }
 }
 

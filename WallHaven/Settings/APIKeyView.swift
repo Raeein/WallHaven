@@ -2,48 +2,138 @@ import SwiftUI
 import KeychainAccess
 
 struct APIKeyView: View {
+    
     @FocusState private var isEditingAPIKey: Bool
     @State private var apiKey: String = ""
-    @State private var apiKeyField: String = ""
     @State private var showingChangePasswordAlert = false
+    @State private var showVerifyingOverlay = false
+    @State private var showAPIKeyInputAlert = false
     
-    let keychain = Keychain(service: Constants.KeyChain.Service)
+    @State private var apiKeyFieldAlert: String = ""
+    @State private var isPresentWebView = false
+    
+    
+    let apiService = APIService()
+    let keychainService = KeychainService()
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section("API Key") {
-                    if apiKey.isEmpty {
-                        apiKeyEntryField
-                    } else {
+            if apiKey.isEmpty {
+                contentUnavailableField
+                    .alert("Add Key", isPresented: $showAPIKeyInputAlert) {
+                        TextField("Enter your name", text: $apiKeyFieldAlert)
+                        Button("Add", action: {
+                            if apiService.verifyAPIKey() {
+                                apiKey = "YAY"
+                            }
+                        })
+                    } message: {
+                        Text("Please enter your API Key")
+                    }
+            } else {
+                Form {
+                    Section("API Key") {
                         apiKeyDisplayField
-                        
+                    }
+                }
+                .navigationTitle("API Config")
+                .toolbar {
+                    saveToolbarItem
+                }
+                .alert(isPresented: $showingChangePasswordAlert) {
+                    changePasswordAlert
+                }
+                .onAppear(perform: {
+                    apiKey = keychainService.loadAPIKey()
+                })
+                .overlay(alignment: .center) {
+                    if showVerifyingOverlay {
+                        VStack(spacing: 20) {
+                            Button("Dismiss", systemImage: "x.circle") {
+                                print("Dismiss")
+                            }
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(.red)
+                            ProgressView()
+                            Text("Verifying API key...")
+                            LottieView(animationName: Constants.Lottie.checkMarkSuccess, loopMode: .loop)
+                                .frame(width: 20, height: 20)
+                        }
+                        .padding(50)
+                        .background(.white)
+                        .clipShape(.rect(cornerRadius: 20.0))
                     }
                 }
             }
-            .navigationTitle("API Config")
-            .toolbar {
-                saveToolbarItem
+        }
+    }
+    var contentUnavailableField: some View {
+        VStack {
+            LottieView(animationName: "key")
+            
+
+            Text("Add your WallHaven API Key")
+            HStack {
+                Button(action: {
+                    withAnimation {
+                        showAPIKeyInputAlert.toggle()
+                    }
+                }) {
+                    Text("Add")
+                        .padding(.horizontal)
+                        .bold()
+                        .font(.headline)
+                    
+                }
+                .buttonStyle(.borderedProminent)
+                
+                Button(action: {
+                    withAnimation {
+                        isPresentWebView.toggle()
+                    }
+                }) {
+                    Text("Find Mine")
+                        .padding(.horizontal)
+                        .bold()
+                        .font(.headline)
+                    
+                }
+                .buttonStyle(.bordered)
+                .sheet(isPresented: $isPresentWebView) {
+                    NavigationStack {
+                        WebView(url: URL(string: "https://wallhaven.cc/settings/account")!)
+
+                            .ignoresSafeArea()
+                            .navigationTitle("Sarunw")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                }
             }
-            .alert(isPresented: $showingChangePasswordAlert) {
-                changePasswordAlert
-            }
-            .onAppear(perform: loadAPIKey)
         }
     }
     
-    var apiKeyEntryField: some View {
-        HStack {
-            Text("Enter your Key")
-            Spacer()
-            TextField("Placeholder", text: $apiKeyField)
-                .focused($isEditingAPIKey)
-                .multilineTextAlignment(.trailing)
-                .textContentType(.password)
-                .autocorrectionDisabled()
-                .truncationMode(.head)
-        }
-    }
+//    var contentUnavailableField: some View {
+//        ContentUnavailableView(label: {
+//            Label("No API Key", systemImage: "key.slash.fill")
+//        }, description: {
+//            Text("Add your WallHaven API Key")
+//                .textContentType(.password)
+//                .autocorrectionDisabled()
+//        }, actions: {
+//            Button(action: {
+//                withAnimation {
+//                    showAPIKeyInputAlert.toggle()
+//                }
+//            }) {
+//                Text("Add")
+//                    .padding(.horizontal)
+//                    .bold()
+//                    .font(.headline)
+//                
+//            }
+//            .buttonStyle(.borderedProminent)
+//        })
+//    }
     
     var apiKeyDisplayField: some View {
         HStack {
@@ -65,10 +155,11 @@ struct APIKeyView: View {
     var saveToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button("save") {
-                saveAPIKey()
+#warning("FIX THIS")
+                keychainService.saveAPIKey(apiKey)
             }
-            .foregroundStyle(isEditingAPIKey && !apiKeyField.isEmpty ? .blue : .gray)
-            .disabled(isEditingAPIKey && !apiKeyField.isEmpty ? false : true)
+            //            .foregroundStyle(isEditingAPIKey && !apiKeyField.isEmpty ? .blue : .gray)
+            //            .disabled(isEditingAPIKey && !apiKeyField.isEmpty ? false : true)
             
         }
     }
@@ -78,58 +169,14 @@ struct APIKeyView: View {
             title: Text("Change API Key"),
             message: Text("Would you like to change your API Key?"),
             primaryButton: .default(Text("Yes")) {
-                clearAPIKey()
+                keychainService.clearAPIKey()
                 apiKey = ""
             },
             secondaryButton: .cancel()
         )
     }
-    
-    private func saveAPIKey() {
-        guard !apiKeyField.isEmpty else { return }
-        performKeychainOperation {
-            try keychain
-                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
-                .authenticationPrompt("Authenticate to save your API Key")
-                .set(apiKeyField, key: Constants.KeyChain.Key)
-            
-            loadAPIKey()
-        }
-    }
-    
-    private func clearAPIKey() {
-        performKeychainOperation {
-            try keychain
-                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
-                .authenticationPrompt("Authenticate to delete your API Key")
-                .remove(Constants.KeyChain.Key)
-        }
-    }
-    
-    private func loadAPIKey() {
-        performKeychainOperation {
-            let storedApiKey = try keychain
-                .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
-                .authenticationPrompt("Authenticate to retrieve your API Key")
-                .get(Constants.KeyChain.Key)
-            DispatchQueue.main.async {
-                apiKey = storedApiKey ?? ""
-            }
-        }
-    }
-    
-    private func performKeychainOperation(operation: @escaping () throws -> Void) {
-        DispatchQueue.global().async {
-            do {
-                try operation()
-            } catch {
-                DispatchQueue.main.async {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
 }
+
 
 #Preview {
     APIKeyView()

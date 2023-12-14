@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 @main
 struct WallHavenApp: App {
@@ -34,6 +35,12 @@ struct WallHavenApp: App {
         WindowGroup {
             RootView()
                 .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
+                .task {
+                    try? Tips.configure([
+                        .displayFrequency(.weekly),
+                        .datastoreLocation(.applicationDefault)
+                    ])
+                }
         }
 //        .modelContainer(sharedModelContainer)
     }

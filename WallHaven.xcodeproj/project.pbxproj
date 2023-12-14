@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27071FFF2B2B7E71004FDA06 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 27071FFE2B2B7E71004FDA06 /* Lottie */; };
+		270720022B2B7EE5004FDA06 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270720012B2B7EE5004FDA06 /* LottieView.swift */; };
+		270720042B2B80F8004FDA06 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = 270720032B2B80F8004FDA06 /* check.json */; };
+		270720082B2B820F004FDA06 /* cross.json in Resources */ = {isa = PBXBuildFile; fileRef = 270720072B2B820F004FDA06 /* cross.json */; };
+		2707200C2B2B8D02004FDA06 /* dizzy.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200A2B2B8D01004FDA06 /* dizzy.json */; };
+		2707200D2B2B8D02004FDA06 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200B2B2B8D01004FDA06 /* key.json */; };
+		2707200F2B2B9183004FDA06 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707200E2B2B9183004FDA06 /* WebView.swift */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -31,6 +38,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270720012B2B7EE5004FDA06 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		270720032B2B80F8004FDA06 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
+		270720072B2B820F004FDA06 /* cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cross.json; sourceTree = "<group>"; };
+		2707200A2B2B8D01004FDA06 /* dizzy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dizzy.json; sourceTree = "<group>"; };
+		2707200B2B2B8D01004FDA06 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
+		2707200E2B2B9183004FDA06 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
@@ -61,12 +74,33 @@
 			files = (
 				27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */,
 				27DF44022B1F783700361BBC /* Security.framework in Frameworks */,
+				27071FFF2B2B7E71004FDA06 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270720002B2B7EDB004FDA06 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				270720092B2B8239004FDA06 /* LottieAnimations */,
+				270720012B2B7EE5004FDA06 /* LottieView.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		270720092B2B8239004FDA06 /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				2707200A2B2B8D01004FDA06 /* dizzy.json */,
+				2707200B2B2B8D01004FDA06 /* key.json */,
+				270720032B2B80F8004FDA06 /* check.json */,
+				270720072B2B820F004FDA06 /* cross.json */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 		279D4B692B27731A0082ACD1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +123,6 @@
 		27D1908E2B12C9F80002F08C = {
 			isa = PBXGroup;
 			children = (
-				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
 				27D190992B12C9F80002F08C /* WallHaven */,
 				27D190982B12C9F80002F08C /* Products */,
 				27DF44002B1F783700361BBC /* Frameworks */,
@@ -107,6 +140,8 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
+				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
+				270720002B2B7EDB004FDA06 /* Lottie */,
 				27E1F5CD2B29356E0067E96A /* Services */,
 				27D190AA2B12CBF50002F08C /* RootView.swift */,
 				27DF43FD2B1F742200361BBC /* Settings */,
@@ -143,6 +178,7 @@
 			children = (
 				27DF43FE2B1F744100361BBC /* SettingsView.swift */,
 				27DF44052B1F7A2400361BBC /* APIKeyView.swift */,
+				2707200E2B2B9183004FDA06 /* WebView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -184,6 +220,7 @@
 			name = WallHaven;
 			packageProductDependencies = (
 				27DF44082B200E3000361BBC /* KeychainAccess */,
+				27071FFE2B2B7E71004FDA06 /* Lottie */,
 			);
 			productName = WallHaven;
 			productReference = 27D190972B12C9F80002F08C /* WallHaven.app */;
@@ -215,6 +252,7 @@
 			mainGroup = 27D1908E2B12C9F80002F08C;
 			packageReferences = (
 				27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				27071FFD2B2B7E71004FDA06 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 27D190982B12C9F80002F08C /* Products */;
 			projectDirPath = "";
@@ -230,8 +268,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270720082B2B820F004FDA06 /* cross.json in Resources */,
 				27D190A42B12C9F90002F08C /* Preview Assets.xcassets in Resources */,
+				2707200C2B2B8D02004FDA06 /* dizzy.json in Resources */,
 				27D190A12B12C9F90002F08C /* Assets.xcassets in Resources */,
+				270720042B2B80F8004FDA06 /* check.json in Resources */,
+				2707200D2B2B8D02004FDA06 /* key.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +295,9 @@
 				27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */,
 				27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */,
 				279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */,
+				270720022B2B7EE5004FDA06 /* LottieView.swift in Sources */,
 				27D190AB2B12CBF50002F08C /* RootView.swift in Sources */,
+				2707200F2B2B9183004FDA06 /* WebView.swift in Sources */,
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */,
@@ -472,6 +516,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		27071FFD2B2B7E71004FDA06 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.4;
+			};
+		};
 		27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -483,6 +535,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		27071FFE2B2B7E71004FDA06 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27071FFD2B2B7E71004FDA06 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		27DF44082B200E3000361BBC /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */;
