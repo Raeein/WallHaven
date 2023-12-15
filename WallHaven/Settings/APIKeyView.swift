@@ -12,6 +12,8 @@ struct APIKeyView: View {
     @State private var apiKeyFieldAlert: String = ""
     @State private var isPresentWebView = false
     
+    @State private var showInvalidAPIKeyAlert = false
+    
     
     let apiService = APIService()
     let keychainService = KeychainService()
@@ -21,30 +23,46 @@ struct APIKeyView: View {
             if apiKey.isEmpty {
                 contentUnavailableField
                     .alert("Add Key", isPresented: $showAPIKeyInputAlert) {
-                        TextField("Enter your name", text: $apiKeyFieldAlert)
-                        Button("Add", action: {
-                            if apiService.verifyAPIKey() {
-                                apiKey = "YAY"
+                        TextField("Enter your key", text: $apiKeyFieldAlert)
+                        Button("Verify", action: {
+                            Task {
+                                let result = await apiService.verifyAPIKey(withKey: apiKeyFieldAlert)
+                                switch result {
+                                case .success():
+                                    keychainService.saveAPIKey(apiKeyFieldAlert)
+                                    apiKey = apiKeyFieldAlert
+                                    apiKeyFieldAlert = ""
+                                case .failure(let error):
+                                    showInvalidAPIKeyAlert = true
+                                    apiKeyFieldAlert = ""
+                                    print(error.localizedDescription)
+                                }
                             }
                         })
                     } message: {
                         Text("Please enter your API Key")
                     }
+                    .alert("Invalid API Key. Please try again.", isPresented: $showInvalidAPIKeyAlert) {
+                        Button("Dismiss", role: .cancel) {
+                            showInvalidAPIKeyAlert.toggle()
+                        }
+                    }
             } else {
                 Form {
-                    Section("API Key") {
+                    Section {
                         apiKeyDisplayField
+                    } footer: {
+                        Text("To delete the key, tap on it")
                     }
                 }
                 .navigationTitle("API Config")
-                .toolbar {
-                    saveToolbarItem
-                }
                 .alert(isPresented: $showingChangePasswordAlert) {
                     changePasswordAlert
                 }
                 .onAppear(perform: {
-                    apiKey = keychainService.loadAPIKey()
+                    if apiKey.isEmpty {
+                        apiKey = keychainService.loadAPIKey()
+                    }
                 })
                 .overlay(alignment: .center) {
                     if showVerifyingOverlay {
@@ -66,26 +84,19 @@ struct APIKeyView: View {
                 }
             }
         }
+        .onAppear(perform: {
+            if apiKey.isEmpty {
+                apiKey = keychainService.loadAPIKey()
+            }
+        })
     }
     var contentUnavailableField: some View {
         VStack {
             LottieView(animationName: "key")
             
-
+            
             Text("Add your WallHaven API Key")
             HStack {
-                Button(action: {
-                    withAnimation {
-                        showAPIKeyInputAlert.toggle()
-                    }
-                }) {
-                    Text("Add")
-                        .padding(.horizontal)
-                        .bold()
-                        .font(.headline)
-                    
-                }
-                .buttonStyle(.borderedProminent)
                 
                 Button(action: {
                     withAnimation {
@@ -99,41 +110,39 @@ struct APIKeyView: View {
                     
                 }
                 .buttonStyle(.bordered)
+                
+                Button(action: {
+                    withAnimation {
+                        showAPIKeyInputAlert.toggle()
+                    }
+                }) {
+                    Text("Add")
+                        .padding(.horizontal)
+                        .bold()
+                        .font(.headline)
+                    
+                }
+                .buttonStyle(.borderedProminent)
+                
                 .sheet(isPresented: $isPresentWebView) {
                     NavigationStack {
                         WebView(url: URL(string: "https://wallhaven.cc/settings/account")!)
-
-                            .ignoresSafeArea()
-                            .navigationTitle("Sarunw")
-                            .navigationBarTitleDisplayMode(.inline)
+                        
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button(action: {
+                                        isPresentWebView = false
+                                    }) {
+                                        Image(systemName: "x.circle.fill")
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                            }
                     }
                 }
             }
         }
     }
-    
-//    var contentUnavailableField: some View {
-//        ContentUnavailableView(label: {
-//            Label("No API Key", systemImage: "key.slash.fill")
-//        }, description: {
-//            Text("Add your WallHaven API Key")
-//                .textContentType(.password)
-//                .autocorrectionDisabled()
-//        }, actions: {
-//            Button(action: {
-//                withAnimation {
-//                    showAPIKeyInputAlert.toggle()
-//                }
-//            }) {
-//                Text("Add")
-//                    .padding(.horizontal)
-//                    .bold()
-//                    .font(.headline)
-//                
-//            }
-//            .buttonStyle(.borderedProminent)
-//        })
-//    }
     
     var apiKeyDisplayField: some View {
         HStack {
@@ -152,17 +161,15 @@ struct APIKeyView: View {
         }
     }
     
-    var saveToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button("save") {
-#warning("FIX THIS")
-                keychainService.saveAPIKey(apiKey)
-            }
-            //            .foregroundStyle(isEditingAPIKey && !apiKeyField.isEmpty ? .blue : .gray)
-            //            .disabled(isEditingAPIKey && !apiKeyField.isEmpty ? false : true)
-            
-        }
-    }
+//    var saveToolbarItem: some ToolbarContent {
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//            Button("save") {
+//                Task {
+//                    let _ = await  apiService.verifyAPIKey(withKey: apiKey)
+//                }
+//            }
+//        }
+//    }
     
     var changePasswordAlert: Alert {
         Alert(

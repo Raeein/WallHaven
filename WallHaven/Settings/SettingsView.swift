@@ -12,9 +12,11 @@ struct SettingsView: View {
     @AppStorage("imageQuality") private var imageQuality: ImageQuality = .low
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
     @AppStorage("isSensoryFeedbackEnabled") private var isSensoryFeedbackEnabled = false
+    
     var body: some View {
         NavigationStack {
             Form {
+
                 Section(header: Text("PREFRENCES")                               .font(.subheadline)
                     .foregroundColor(.secondary), content: {
                         HStack{
@@ -23,16 +25,10 @@ struct SettingsView: View {
                             Toggle(isOn: $isDarkModeEnabled) {
                                 Text("Dark Mode")
                             }
+                            .tint(.blue)
                             
                         }
-                        Toggle(isOn: $isSensoryFeedbackEnabled) {
-                            Text("Vibrate")
-                            Text("Vibrate when image is succesfully downloaded")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .padding(.leading, 8)
-                            
-                        }
+
                         
                         HStack{
                             NavigationLink {
@@ -48,12 +44,29 @@ struct SettingsView: View {
                         }
                         .pickerStyle(.menu)
                         
-                        NavigationLink {
-                            LottieView(animationName: "dizzy")
-                        } label: {
-                            Text("Make me dizzy")
-                        }
+       
                     })
+                
+                Section {
+                    Toggle(isOn: $isSensoryFeedbackEnabled) {
+                        Text("Vibrate")
+                    }
+                    .tint(.blue)
+                } footer: {
+                    Text("Vibrate phone when image is saved to photos.")
+                }
+                
+                
+                Section {
+                    NavigationLink {
+                        LottieView(animationName: "dizzy")
+                    } label: {
+                        Text("Make me dizzy")
+                    }
+                } footer: {
+                    Text("Completely unnecessary...just a bored out of mind fellow dev!")
+                }
+
         
             }
             .navigationTitle("Settings")

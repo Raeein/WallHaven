@@ -24,8 +24,6 @@ struct KeychainService {
                 .accessibility(.whenPasscodeSetThisDeviceOnly, authenticationPolicy: [.biometryAny])
                 .authenticationPrompt("Authenticate to save your API Key")
                 .set(apiKey, key: Constants.KeyChain.Key)
-            
-            _ = loadAPIKey()
         }
     }
     
@@ -48,6 +46,7 @@ struct KeychainService {
             key = storedApiKey ?? ""
 
         }
+        print("Key is \(key)")
         return key
     }
     

@@ -3,14 +3,21 @@ import WebKit
 
 struct WebView: UIViewRepresentable {
     let url: URL
-
+    
     func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        webView.load(URLRequest(url: url))
-        return webView
+        
+        
+        let prefs: WKWebpagePreferences = WKWebpagePreferences()
+        prefs.allowsContentJavaScript = true
+        
+        let config: WKWebViewConfiguration = WKWebViewConfiguration()
+        config.defaultWebpagePreferences = prefs
+        
+        return WKWebView(frame: .zero, configuration: config)
     }
-
+    
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        // This space can be left blank
+        let request = URLRequest(url: url)
+        uiView.load(request)
     }
 }

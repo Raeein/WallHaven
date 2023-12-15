@@ -11,5 +11,15 @@ struct Constants {
         static let crossFailure = "cross"
         static let key = "key"
         static let dizzy = "dizzy"
+        static let poo = {
+            return key + dizzy
+        }
+    }
+    
+    struct WallHavenURL {
+        static let home = "https://wallhaven.cc"
+        static let search = {
+            return home + "/api/v1/search"
+        }
     }
 }

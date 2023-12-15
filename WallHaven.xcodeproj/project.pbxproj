@@ -14,6 +14,7 @@
 		2707200C2B2B8D02004FDA06 /* dizzy.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200A2B2B8D01004FDA06 /* dizzy.json */; };
 		2707200D2B2B8D02004FDA06 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200B2B2B8D01004FDA06 /* key.json */; };
 		2707200F2B2B9183004FDA06 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707200E2B2B9183004FDA06 /* WebView.swift */; };
+		2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -44,6 +45,7 @@
 		2707200A2B2B8D01004FDA06 /* dizzy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dizzy.json; sourceTree = "<group>"; };
 		2707200B2B2B8D01004FDA06 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
 		2707200E2B2B9183004FDA06 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 			path = LottieAnimations;
 			sourceTree = "<group>";
 		};
+		2711F8F32B2CB727003E9B6F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		279D4B692B27731A0082ACD1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
+				2711F8F32B2CB727003E9B6F /* Extensions */,
 				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
 				270720002B2B7EDB004FDA06 /* Lottie */,
 				27E1F5CD2B29356E0067E96A /* Services */,
@@ -301,6 +312,7 @@
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */,
+				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);
