@@ -1,4 +1,5 @@
 import SwiftUI
+import Lottie
 import KeychainAccess
 
 struct APIKeyView: View {
@@ -74,8 +75,10 @@ struct APIKeyView: View {
                             .foregroundStyle(.red)
                             ProgressView()
                             Text("Verifying API key...")
-                            LottieView(animationName: Constants.Lottie.checkMarkSuccess, loopMode: .loop)
-                                .frame(width: 20, height: 20)
+                            
+                            LottieView(animation: .named(Constants.Lottie.checkMarkSuccess))
+                                .playing(loopMode: .loop)
+
                         }
                         .padding(50)
                         .background(.white)
@@ -92,7 +95,11 @@ struct APIKeyView: View {
     }
     var contentUnavailableField: some View {
         VStack {
-            LottieView(animationName: "key")
+            LottieView(animation: .named(Constants.Lottie.key))
+                .playing(loopMode: .loop)
+       
+            Spacer()
+            
             
             
             Text("Add your WallHaven API Key")

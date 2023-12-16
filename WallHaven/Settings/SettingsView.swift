@@ -1,4 +1,5 @@
 import SwiftUI
+import Lottie
 
 
 enum ImageQuality: String, CaseIterable, Identifiable {
@@ -59,7 +60,8 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink {
-                        LottieView(animationName: "dizzy")
+                        LottieView(animation: .named(Constants.Lottie.dizzy))
+                            .playing(loopMode: .loop)
                     } label: {
                         Text("Make me dizzy")
                     }

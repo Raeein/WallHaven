@@ -11,9 +11,8 @@ struct Constants {
         static let crossFailure = "cross"
         static let key = "key"
         static let dizzy = "dizzy"
-        static let poo = {
-            return key + dizzy
-        }
+        static let wallpaperLoading = "wallpaper"
+        static let loading = "loading"
     }
     
     struct WallHavenURL {
