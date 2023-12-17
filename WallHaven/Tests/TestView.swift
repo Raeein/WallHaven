@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ImageViewTest: View {
-    
+
     private let wallpaperPath = "https://w.wallhaven.cc/full/7p/wallhaven-7pmj9o.jpg"
-    
+
     var body: some View {
         ZStack(alignment: .center) {
             AsyncImage(url: URL(string: wallpaperPath)) { phase in
@@ -16,14 +16,14 @@ struct ImageViewTest: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                
+
                         .clipped()
                 @unknown default:
                     fatalError()
                 }
             }
             .ignoresSafeArea(.all)
-            
+
             VStack {
                 Spacer()
                 HStack {
@@ -32,18 +32,18 @@ struct ImageViewTest: View {
                             .foregroundStyle(.blue)
                     }
                     Spacer()
-                    
+
                     Button(action: {}) {
                         Image(systemName: "heart")
                             .foregroundStyle(.blue)
                     }
-                    
+
                     Spacer()
-                    
+
                     Button(action: {}) {
                         Image(systemName: "arrow.down.circle")
                             .foregroundStyle(.blue)
-                        
+
                     }
                 }
                 .padding()
@@ -54,7 +54,7 @@ struct ImageViewTest: View {
 }
 
 struct TestViewContextMenu: View {
-    
+
     var body: some View {
         HStack {
             // Other views
@@ -63,17 +63,17 @@ struct TestViewContextMenu: View {
             // Button, that when tapped shows 3 options
             Menu {
                 Button(action: {
-                    
+
                 }) {
                     Label("Add", systemImage: "plus.circle")
                 }
                 Button(action: {
-                    
+
                 }) {
                     Label("Delete", systemImage: "minus.circle")
                 }
                 Button(action: {
-                    
+
                 }) {
                     Label("Edit", systemImage: "pencil.circle")
                 }
@@ -85,10 +85,9 @@ struct TestViewContextMenu: View {
     }
 }
 
-
-//#Preview {
+// #Preview {
 //    ImageViewTest()
-//}
+// }
 #Preview {
     TestViewContextMenu()
 }

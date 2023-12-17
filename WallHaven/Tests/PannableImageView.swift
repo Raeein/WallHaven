@@ -21,7 +21,7 @@ struct PannableImageView: View {
                                     height: lastOffset.height + gesture.translation.height
                                 )
                             }
-                            .onEnded { gesture in
+                            .onEnded { _ in
                                 let uiImage = ImageRenderer(content: image).uiImage
                                 guard let uiImage = uiImage else { return }
 
@@ -29,22 +29,22 @@ struct PannableImageView: View {
                                 let imageWidth = uiImage.size.width
                                 let imageHeight = uiImage.size.height
                                 let screenSize = geometry.size
-                                
+
                                 // Calculate the scale of the image
                                 let scaleX = screenSize.width / imageWidth
                                 let scaleY = screenSize.height / imageHeight
                                 let scale = max(scaleX, scaleY)
-                                
+
                                 // Calculate the bounds
                                 let boundWidth = (imageWidth * scale - screenSize.width) / 2
                                 let boundHeight = (imageHeight * scale - screenSize.height) / 2
-                                
+
                                 // Restrict the offset
                                 let newOffset = CGSize(
                                     width: min(boundWidth, max(-boundWidth, offset.width)),
                                     height: min(boundHeight, max(-boundHeight, offset.height))
                                 )
-                                
+
                                 offset = newOffset
                                 lastOffset = newOffset
                             }
@@ -58,8 +58,6 @@ struct PannableImageView: View {
 }
 
 // Preview code
-
-
 
 #Preview {
     PannableImageView()

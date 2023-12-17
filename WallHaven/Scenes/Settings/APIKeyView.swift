@@ -3,22 +3,21 @@ import Lottie
 import KeychainAccess
 
 struct APIKeyView: View {
-    
+
     @FocusState private var isEditingAPIKey: Bool
     @State private var apiKey: String = ""
     @State private var showingChangePasswordAlert = false
     @State private var showVerifyingOverlay = false
     @State private var showAPIKeyInputAlert = false
-    
+
     @State private var apiKeyFieldAlert: String = ""
     @State private var isPresentWebView = false
-    
+
     @State private var showInvalidAPIKeyAlert = false
-    
-    
+
     let apiService = APIService()
     let keychainService = KeychainService()
-    
+
     var body: some View {
         NavigationStack {
             if apiKey.isEmpty {
@@ -29,7 +28,7 @@ struct APIKeyView: View {
                             Task {
                                 let result = await apiService.verifyAPIKey(withKey: apiKeyFieldAlert)
                                 switch result {
-                                case .success():
+                                case .success:
                                     keychainService.saveAPIKey(apiKeyFieldAlert)
                                     apiKey = apiKeyFieldAlert
                                     apiKeyFieldAlert = ""
@@ -75,7 +74,7 @@ struct APIKeyView: View {
                             .foregroundStyle(.red)
                             ProgressView()
                             Text("Verifying API key...")
-                            
+
                             LottieView(animation: .named(Constants.Lottie.checkMarkSuccess))
                                 .playing(loopMode: .loop)
 
@@ -97,14 +96,12 @@ struct APIKeyView: View {
         VStack {
             LottieView(animation: .named(Constants.Lottie.key))
                 .playing(loopMode: .loop)
-       
+
             Spacer()
-            
-            
-            
+
             Text("Add your WallHaven API Key")
             HStack {
-                
+
                 Button(action: {
                     withAnimation {
                         isPresentWebView.toggle()
@@ -114,10 +111,10 @@ struct APIKeyView: View {
                         .padding(.horizontal)
                         .bold()
                         .font(.headline)
-                    
+
                 }
                 .buttonStyle(.bordered)
-                
+
                 Button(action: {
                     withAnimation {
                         showAPIKeyInputAlert.toggle()
@@ -127,14 +124,14 @@ struct APIKeyView: View {
                         .padding(.horizontal)
                         .bold()
                         .font(.headline)
-                    
+
                 }
                 .buttonStyle(.borderedProminent)
-                
+
                 .sheet(isPresented: $isPresentWebView) {
                     NavigationStack {
                         WebView(url: URL(string: "https://wallhaven.cc/settings/account")!)
-                        
+
                             .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
                                     Button(action: {
@@ -150,7 +147,7 @@ struct APIKeyView: View {
             }
         }
     }
-    
+
     var apiKeyDisplayField: some View {
         HStack {
             Text("Your Key")
@@ -167,7 +164,7 @@ struct APIKeyView: View {
                 )
         }
     }
-    
+
 //    var saveToolbarItem: some ToolbarContent {
 //        ToolbarItem(placement: .navigationBarTrailing) {
 //            Button("save") {
@@ -177,7 +174,7 @@ struct APIKeyView: View {
 //            }
 //        }
 //    }
-    
+
     var changePasswordAlert: Alert {
         Alert(
             title: Text("Change API Key"),
@@ -190,7 +187,6 @@ struct APIKeyView: View {
         )
     }
 }
-
 
 #Preview {
     APIKeyView()

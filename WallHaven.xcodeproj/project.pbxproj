@@ -15,9 +15,11 @@
 		2707200D2B2B8D02004FDA06 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200B2B2B8D01004FDA06 /* key.json */; };
 		2707200F2B2B9183004FDA06 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707200E2B2B9183004FDA06 /* WebView.swift */; };
 		2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
+		274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274AFE092B2F40E900FFFC16 /* ImageGridView.swift */; };
 		275E935B2B2DFE6900CEF178 /* wallpaper.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E935A2B2DFE6900CEF178 /* wallpaper.json */; };
 		275E935F2B2DFFC100CEF178 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E935E2B2DFFC100CEF178 /* Tips.swift */; };
 		275E93612B2E033D00CEF178 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E93602B2E033D00CEF178 /* loading.json */; };
+		27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -49,9 +51,11 @@
 		2707200B2B2B8D01004FDA06 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
 		2707200E2B2B9183004FDA06 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		274AFE092B2F40E900FFFC16 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		275E935A2B2DFE6900CEF178 /* wallpaper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallpaper.json; sourceTree = "<group>"; };
 		275E935E2B2DFFC100CEF178 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		275E93602B2E033D00CEF178 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperViewModel.swift; sourceTree = "<group>"; };
 		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
@@ -119,6 +123,33 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		274AFE072B2F405D00FFFC16 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				27755BA52B2F7547004A7977 /* Common */,
+				279D4B6C2B278EE80082ACD1 /* Home */,
+				274AFE082B2F40A900FFFC16 /* Search */,
+				27DF43FD2B1F742200361BBC /* Settings */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		274AFE082B2F40A900FFFC16 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		27755BA52B2F7547004A7977 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		279D4B692B27731A0082ACD1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,14 +160,15 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		279D4B6C2B278EE80082ACD1 /* HomeTab */ = {
+		279D4B6C2B278EE80082ACD1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				27D190B12B12CDE60002F08C /* HomeView.swift */,
 				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
 				275E935E2B2DFFC100CEF178 /* Tips.swift */,
+				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
 			);
-			path = HomeTab;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		27D1908E2B12C9F80002F08C = {
@@ -159,16 +191,14 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
-				2711F8F32B2CB727003E9B6F /* Extensions */,
 				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
+				27D190AA2B12CBF50002F08C /* RootView.swift */,
+				27DF44032B1F787200361BBC /* Constants.swift */,
+				274AFE072B2F405D00FFFC16 /* Scenes */,
+				2711F8F32B2CB727003E9B6F /* Extensions */,
 				270720002B2B7EDB004FDA06 /* Lottie */,
 				27E1F5CD2B29356E0067E96A /* Services */,
-				27D190AA2B12CBF50002F08C /* RootView.swift */,
-				27DF43FD2B1F742200361BBC /* Settings */,
 				27D190B02B12CDA60002F08C /* SwiftDataExample */,
-				279D4B6C2B278EE80082ACD1 /* HomeTab */,
-				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
-				27DF44032B1F787200361BBC /* Constants.swift */,
 				27D190A02B12C9F90002F08C /* Assets.xcassets */,
 				27D190A22B12C9F90002F08C /* Preview Content */,
 				279D4B692B27731A0082ACD1 /* Tests */,
@@ -232,6 +262,7 @@
 				27D190932B12C9F80002F08C /* Sources */,
 				27D190942B12C9F80002F08C /* Frameworks */,
 				27D190952B12C9F80002F08C /* Resources */,
+				274AFE0D2B2F49AD00FFFC16 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -301,6 +332,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		274AFE0D2B2F49AD00FFFC16 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		27D190932B12C9F80002F08C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -321,9 +372,11 @@
 				270720022B2B7EE5004FDA06 /* LottieView.swift in Sources */,
 				27D190AB2B12CBF50002F08C /* RootView.swift in Sources */,
 				2707200F2B2B9183004FDA06 /* WebView.swift in Sources */,
+				27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */,
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */,
+				274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */,
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
@@ -370,7 +423,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -433,7 +486,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

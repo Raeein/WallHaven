@@ -2,11 +2,11 @@ import SwiftUI
 import Photos
 
 struct ImageView: View {
-    
+
     init(wallpaper: Wallpaper, currentImage: UIImage? = nil) {
         self.wallpaper = wallpaper
     }
-    
+
     private func openPrivacySettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString),
               UIApplication.shared.canOpenURL(url) else {
@@ -15,13 +15,13 @@ struct ImageView: View {
 
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
+
     func saveImage(imageToSave: UIImage?) {
         guard let imageToSave = imageToSave else { return }
         let imageSaver = ImageSaver()
         imageSaver.writeToPhotoAlbum(image: imageToSave)
     }
-    
+
     func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
@@ -42,14 +42,13 @@ struct ImageView: View {
         }
     }
 
-    
     private let wallpaper: Wallpaper
     private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
     @State private var currentImage: UIImage?
     @State private var showToast = false
     @State private var showAlert = false
     @State private var imageSaved = false
-    
+
     var body: some View {
         ZStack(alignment: .center) { // Align the content to the bottom
             AsyncImage(url: URL(string: wallpaper.path)) { phase in
@@ -69,12 +68,12 @@ struct ImageView: View {
                         .onAppear(perform: {
                             currentImage = ImageRenderer(content: image).uiImage
                         })
-                        
+
                 @unknown default:
                     fatalError()
                 }
             }
-            
+
             VStack {
                 if showToast {
                     Label("Image successfully saved to photos", systemImage: "info.circle")
@@ -102,22 +101,22 @@ struct ImageView: View {
                         ImageViewTabItem(imageName: "arrow.down.circle", imageNameDesc: "Download")
                     }
                     Spacer()
-                    
+
                     Button(action: {
                         // Handle save Favourite
                     }) {
                         ImageViewTabItem(imageName: "heart", imageNameDesc: "Favourite")
                     }
-                    
+
                     Spacer()
-                    
+
                     Button(action: {
                         // Handle download info
                     }) {
                         ImageViewTabItem(imageName: "info.circle", imageNameDesc: "Info")
                     }
                 }
-                
+
                 .padding([.horizontal, .top])
                 .background(.ultraThinMaterial)
             }
@@ -147,15 +146,15 @@ struct ImageView: View {
 }
 
 struct ImageViewTabItem: View {
-    
+
     private let imageName: String
     private let imageNameDesc: String
-    
+
     init(imageName: String, imageNameDesc: String) {
         self.imageName = imageName
         self.imageNameDesc = imageNameDesc
     }
-    
+
     var body: some View {
         VStack {
             Circle()
@@ -168,7 +167,7 @@ struct ImageViewTabItem: View {
                         .frame(width: 16, height: 16)
                         .foregroundStyle(.black)
                 }
-            
+
             Text(imageNameDesc)
                 .foregroundStyle(.blue)
                 .font(.footnote)

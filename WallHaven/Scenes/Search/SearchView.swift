@@ -5,19 +5,21 @@ struct SearchView: View {
     @State private var isPopularSearchesExpanded = true
     @State private var isRecentSearchesExpanded = true
     @State private var isSearchBarPresented = false
-    
+
+    @State private var wallpapers = [Wallpaper]()
+
     private var popularSearches = [
         "First",
         "Second",
         "Third"
     ]
-    
+
     @State private var recentSearches = [
         "Fourth",
         "Fifth",
         "Sixth"
     ]
-    
+
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -29,7 +31,7 @@ struct SearchView: View {
                             }
                         }
                     }
-                    
+
                     Section("Recent searches", isExpanded: $isRecentSearchesExpanded) {
                         ForEach(recentSearches, id: \.self) { item in
                             NavigationLink(destination: Text("Detail View for \(item)")) {
@@ -43,10 +45,9 @@ struct SearchView: View {
                 }
                 .listStyle(.sidebar)
             }
-            
+
             .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
             .onSubmit(of: .search) {
-                // Handle the search action here
                 print("Searching for \(searchText)")
             }
         }

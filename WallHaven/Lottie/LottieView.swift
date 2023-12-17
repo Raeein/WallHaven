@@ -1,7 +1,7 @@
-//import Lottie
-//import SwiftUI
+// import Lottie
+// import SwiftUI
 //
-//struct LottieView: UIViewRepresentable {
+// struct LottieView: UIViewRepresentable {
 //    var animationName: String
 //    var loopMode: LottieLoopMode = .loop
 //
@@ -20,4 +20,4 @@
 //    func updateUIView(_ uiView: UIViewType, context: Context) {
 //          
 //      }
-//}
+// }

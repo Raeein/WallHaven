@@ -5,11 +5,11 @@ struct WallpaperResponse: Codable {
 }
 
 struct Wallpaper: Codable, Hashable {
-    
+
     static func == (lhs: Wallpaper, rhs: Wallpaper) -> Bool {
         return lhs.id == rhs.id
     }
-    
+
     let id: String
     let url: String
     let shortUrl: String
@@ -41,7 +41,6 @@ struct Thumbs: Codable, Hashable {
     let original: String
     let small: String
 }
-
 
 struct TagSearch: Codable, Hashable {
     let id: Int

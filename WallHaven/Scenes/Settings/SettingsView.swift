@@ -1,7 +1,6 @@
 import SwiftUI
 import Lottie
 
-
 enum ImageQuality: String, CaseIterable, Identifiable {
     case high = "High"
     case low = "Low"
@@ -9,29 +8,24 @@ enum ImageQuality: String, CaseIterable, Identifiable {
 }
 
 struct SettingsView: View {
-    
+
     @AppStorage("imageQuality") private var imageQuality: ImageQuality = .low
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
     @AppStorage("isSensoryFeedbackEnabled") private var isSensoryFeedbackEnabled = false
-    
+
     var body: some View {
         NavigationStack {
             Form {
-
-                Section(header: Text("PREFRENCES")                               .font(.subheadline)
-                    .foregroundColor(.secondary), content: {
-                        HStack{
+                Section("PREFRENCES", content: {
+                        HStack {
                             Image(systemName: isDarkModeEnabled ? "moon.fill" : "moon")
-                            
                             Toggle(isOn: $isDarkModeEnabled) {
                                 Text("Dark Mode")
                             }
                             .tint(.blue)
-                            
                         }
 
-                        
-                        HStack{
+                        HStack {
                             NavigationLink {
                                 APIKeyView()
                             } label: {
@@ -44,10 +38,9 @@ struct SettingsView: View {
                             }
                         }
                         .pickerStyle(.menu)
-                        
-       
+
                     })
-                
+
                 Section {
                     Toggle(isOn: $isSensoryFeedbackEnabled) {
                         Text("Vibrate")
@@ -56,8 +49,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Vibrate phone when image is saved to photos.")
                 }
-                
-                
+
                 Section {
                     NavigationLink {
                         LottieView(animation: .named(Constants.Lottie.dizzy))
@@ -69,17 +61,14 @@ struct SettingsView: View {
                     Text("Completely unnecessary...just a bored out of mind fellow dev!")
                 }
 
-        
             }
             .navigationTitle("Settings")
         }
     }
 }
 
-
-
 #Preview {
     SettingsView()
         .previewDevice(PreviewDevice(rawValue: "iPhone 15"))
-    
+
 }

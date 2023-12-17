@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreenWallpaperPreview: View {
     var wallpaperImage: Image // Your wallpaper image
-    
+
     var body: some View {
         ZStack {
             // Wallpaper Image
@@ -17,7 +17,7 @@ struct HomeScreenWallpaperPreview: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            
+
             // Simulated App Icons at the bottom
             VStack {
                 Spacer()

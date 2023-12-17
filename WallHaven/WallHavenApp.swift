@@ -13,11 +13,11 @@ import TipKit
 struct WallHavenApp: App {
 
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
-    
+
     init() {
 //        adjustVisualAppearance()
     }
-    
+
 //    var sharedModelContainer: ModelContainer = {
 //        let schema = Schema([
 //            Item.self,
@@ -34,6 +34,7 @@ struct WallHavenApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .animation(.smooth, value: isDarkModeEnabled)
                 .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
                 .task {
                     try? Tips.configure([
@@ -44,13 +45,13 @@ struct WallHavenApp: App {
         }
 //        .modelContainer(sharedModelContainer)
     }
-    
+
     private func adjustVisualAppearance() {
         var navigationBarLayoutMargins: UIEdgeInsets = .zero
         navigationBarLayoutMargins.left = 26.0
         navigationBarLayoutMargins.right = navigationBarLayoutMargins.left
         UINavigationBar.appearance().layoutMargins = navigationBarLayoutMargins
-        
+
         var tableViewLayoutMargins: UIEdgeInsets = .zero
         tableViewLayoutMargins.left = 28.0
         tableViewLayoutMargins.right = tableViewLayoutMargins.left

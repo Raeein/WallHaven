@@ -1,10 +1,9 @@
 import Foundation
 import KeychainAccess
 
-
 struct KeychainService {
     let keychain = Keychain(service: Constants.KeyChain.Service)
-    
+
     private func performKeychainOperation(operation: @escaping () throws -> Void) {
         DispatchQueue.global().async {
             do {
@@ -16,7 +15,7 @@ struct KeychainService {
             }
         }
     }
-    
+
     func saveAPIKey(_ apiKey: String) {
         guard !apiKey.isEmpty else { return }
         performKeychainOperation {
@@ -26,7 +25,7 @@ struct KeychainService {
                 .set(apiKey, key: Constants.KeyChain.Key)
         }
     }
-    
+
     func clearAPIKey() {
         performKeychainOperation {
             try keychain
@@ -35,7 +34,7 @@ struct KeychainService {
                 .remove(Constants.KeyChain.Key)
         }
     }
-    
+
     func loadAPIKey() -> String {
         var key = ""
         performKeychainOperation {
@@ -49,8 +48,5 @@ struct KeychainService {
         print("Key is \(key)")
         return key
     }
-    
+
 }
-
-
-
