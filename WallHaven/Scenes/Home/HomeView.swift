@@ -4,10 +4,12 @@ import TipKit
 struct HomeView: View {
 
     @Binding var wallpapers: [Wallpaper]
+    @State var configs = WallpaperConfigs()
+    
     var body: some View {
 
         NavigationStack {
-            ImageGridView()
+            ImageGridView(configs: $configs)
         }
     }
 }

@@ -9,21 +9,75 @@ enum APIError: Error {
     case other(Error)
 }
 
-struct APIService {
+enum Purity: String {
+    case sfw
+    case sketchy
+    case nsfw
+    
+    
+    static func purityString(sfw: Bool, sketchy: Bool, nsfw: Bool) -> String {
+        let sfwValue = sfw ? "1" : "0"
+        let sketchyValue = sketchy ? "1" : "0"
+        let nsfwValue = nsfw ? "1" : "0"
+        return sfwValue + sketchyValue + nsfwValue
+    }
+    
+}
 
-    func getRecommendations(page: Int? = nil) async -> [Wallpaper] {
+enum Category: String {
+    case general
+    case anime
+    case people
+    
+    static func categoryString(general: Bool, anime: Bool, people: Bool) -> String {
+        let generalValue = general ? "1" : "0"
+        let animeValue = anime ? "1" : "0"
+        let peopleValue = people ? "1" : "0"
+        return generalValue + animeValue + peopleValue
+    }
+}
+
+enum Sorting: String {
+    case dateAdded = "date_added"
+    case relevance
+    case random
+    case views
+    case favorites
+    case toplist
+}
+
+enum Order: String {
+    case desc
+    case asc
+}
+
+enum TopRange: String {
+    case oneDay = "1d"
+    case threeDays = "3d"
+    case oneWeek = "1w"
+    case oneMonth = "1M"
+    case threeMonths = "3M"
+    case sixMonths = "6M"
+    case oneYear = "1y"
+}
+
+struct WallpaperConfigs {
+    let page: Int? = nil
+    let apiKey: String? = nil
+    var query: String? = nil
+    let sorting: Sorting = .random
+    let isSearchView: Bool = false
+}
+
+
+struct APIService {
+    
+    func getWallpapers(configs: WallpaperConfigs = WallpaperConfigs(), apiKey: String? = nil) async -> [Wallpaper] {
         var wallpapers = [Wallpaper]()
-        let seed = generateSeed()
+        
         do {
-            var url = URL(string: Constants.WallHavenURL.search())!
-                .appending("seed", value: seed)
-                .appending("sorting", value: "random")
+            let url = generateURL(configs: configs, apiKey: apiKey)
             
-            if let page = page {
-                url = url.appending("page", value: String(page))
-            }
-            
-            print("URL is \(url.absoluteString)")
             let (data, _) = try await URLSession.shared.data(from: url)
             let response = try JSONDecoder().decode(WallpaperResponse.self, from: data)
             wallpapers = response.data
@@ -75,5 +129,21 @@ struct APIService {
             seed.append(characters.randomElement()!)
         }
         return seed
+    }
+    
+    private func generateURL(configs: WallpaperConfigs, apiKey: String? = nil) -> URL {
+
+        var url = URL(string: Constants.WallHavenURL.search())!
+            .appending("seed", value: generateSeed())
+            .appending("sorting", value: configs.sorting.rawValue)
+        
+        if let page = configs.page {
+            url = url.appending("page", value: String(page))
+        }
+        if let query = configs.query {
+            url = url.appending("q", value: query)
+        }
+        print("URL is \(url.absoluteString)")
+        return url
     }
 }

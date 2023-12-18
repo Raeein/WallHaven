@@ -1,49 +1,5 @@
 import SwiftUI
 
-struct ImageGridViewCell: View {
-    let wallpaper: Wallpaper
-    let imageQuality: String
-    
-    private let cellWidth = UIScreen.main.bounds.width
-    private let cellHeight = UIScreen.main.bounds.height
-    
-    var body: some View {
-        NavigationLink {
-            ImageView(wallpaper: wallpaper)
-        } label: {
-            AsyncImage(url: URL(string: imageQuality)) { phase in
-
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(
-                            width: cellWidth / 3,
-                            height: cellHeight / 2.5
-                        )
-                        .background(.gray)
-                        .cornerRadius(8)
-                case .failure:
-                    Text("Failed")
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .scaledToFill()
-                        .frame(
-                            width: cellWidth / 3,
-                            height: cellHeight / 2.5
-                        )                                        .clipped()
-                    //                                        .cornerRadius(8)
-
-                @unknown default:
-                    fatalError()
-                }
-            }
-        }
-    }
-}
-
 struct ImageGridView: View {
     @State private var columns = [
         GridItem(.flexible(), spacing: 1),
@@ -52,17 +8,14 @@ struct ImageGridView: View {
     ]
 
     @AppStorage("imageQuality") private var imageQuality: ImageQuality = .low
+    @StateObject var viewModel = WallpaperViewModel()
+    @Binding var configs: WallpaperConfigs
+    @State private var wallpaperShownCount = 0
 
     private let apiService = APIService()
-
     private let filterTip = FilterTip()
     private let refreshTip = RefreshTip()
     
-    @StateObject var viewModel = WallpaperViewModel()
-    
-    
-    @State private var wallpaperShownCount = 0
-
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 1) {
@@ -82,11 +35,11 @@ struct ImageGridView: View {
         .onChange(of: wallpaperShownCount, {
             if wallpaperShownCount == viewModel.wallpapers.count {
                 viewModel.showRefreshing = true
-                viewModel.loadWallpapers()
+                viewModel.loadWallpapers(config: configs)
             }
         })
         .onAppear(perform: {
-            viewModel.loadWallpapers()
+            viewModel.loadWallpapers(config: configs)
             print("image quality is\(imageQuality)")
         })
         .navigationTitle("Home")
@@ -111,7 +64,3 @@ struct ImageGridView: View {
         })
     }
 }
-
-//#Preview {
-//    ImageGridView(wallpapers: [])
-//}

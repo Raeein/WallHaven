@@ -20,6 +20,7 @@
 		275E935F2B2DFFC100CEF178 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E935E2B2DFFC100CEF178 /* Tips.swift */; };
 		275E93612B2E033D00CEF178 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E93602B2E033D00CEF178 /* loading.json */; };
 		27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */; };
+		27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -56,6 +57,7 @@
 		275E935E2B2DFFC100CEF178 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		275E93602B2E033D00CEF178 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperViewModel.swift; sourceTree = "<group>"; };
+		27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridViewCell.swift; sourceTree = "<group>"; };
 		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
 				275E935E2B2DFFC100CEF178 /* Tips.swift */,
 				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
+				27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -262,7 +265,6 @@
 				27D190932B12C9F80002F08C /* Sources */,
 				27D190942B12C9F80002F08C /* Frameworks */,
 				27D190952B12C9F80002F08C /* Resources */,
-				274AFE0D2B2F49AD00FFFC16 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -332,26 +334,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		274AFE0D2B2F49AD00FFFC16 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		27D190932B12C9F80002F08C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -379,6 +361,7 @@
 				274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */,
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
+				27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

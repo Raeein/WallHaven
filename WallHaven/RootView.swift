@@ -56,7 +56,7 @@ struct RootView: View {
             }
         }
         .task {
-            wallpapers = await APIService().getRecommendations()
+            wallpapers = await APIService().getWallpapers()
         }
     }
 }
