@@ -23,8 +23,17 @@ struct ImageGridView: View {
                     ImageGridViewCell(
                         wallpaper: wallpaper,
                         imageQuality: (imageQuality == .high ? wallpaper.thumbs.original : wallpaper.thumbs.small)
-                    ).onAppear {
-                        wallpaperShownCount += 1
+                    )
+                    .onAppear { wallpaperShownCount += 1 }
+                    .contextMenu {
+                        Button("Download") {
+                            // TODO: Add download stuff here
+                            print("Download me")
+                        }
+                        Button("Favourite") {
+                            // TODO: Add download stuff here
+                            print("Download me")
+                        }
                     }
                 }
             }

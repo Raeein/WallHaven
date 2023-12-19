@@ -1,5 +1,7 @@
 import SwiftUI
 import Photos
+import CoreImage
+import CoreImage.CIFilterBuiltins
 
 struct ImageView: View {
 
@@ -105,7 +107,33 @@ struct ImageView: View {
                     Button(action: {
                         // Handle save Favourite
                     }) {
-                        ImageViewTabItem(imageName: "heart", imageNameDesc: "Favourite")
+                        VStack {
+                            Circle()
+                                .fill(Color(UIColor.lightGray))
+                                .frame(width: 32, height: 32)
+                                .overlay {
+                                    Image(systemName: "camera.filters")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 16, height: 16)
+                                        .foregroundStyle(.black)
+                                }
+                            Menu("Boo") {
+                                ScrollView {
+                                    ForEach((1...100).reversed(), id: \.self) {
+                                        Button("\($0)") {
+                                            print("Hi")
+                                        }
+                                    }
+                                }
+                            }
+                            .menuOrder(.fixed)
+                            .foregroundStyle(.blue)
+                            .font(.footnote)
+                            .bold()
+                                
+                        }
+                        
                     }
 
                     Spacer()
@@ -144,6 +172,8 @@ struct ImageView: View {
         .sensoryFeedback(.success, trigger: imageSaved)
     }
 }
+
+
 
 struct ImageViewTabItem: View {
 
