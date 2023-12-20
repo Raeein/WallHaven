@@ -5,9 +5,22 @@ import CoreImage.CIFilterBuiltins
 
 struct ImageView: View {
 
-    init(wallpaper: Wallpaper, currentImage: UIImage? = nil) {
+    init(wallpaper: Wallpaper) {
         self.wallpaper = wallpaper
     }
+    
+    private func loadImageFromURL(wallpaperURL: String) {
+        guard let url = URL(string: wallpaperURL) else { return }
+
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, let uiImage = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.originalImage = Image(uiImage: uiImage)
+                    }
+                }
+            }.resume()
+        }
+
 
     private func openPrivacySettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString),
@@ -45,46 +58,52 @@ struct ImageView: View {
     }
     
     private func setAverageColor() {
-        guard let currentImage else { return }
-        let uiColor = currentImage.averageColor ?? .clear
+        guard let originalUIImage else { return }
+        let uiColor = originalUIImage.averageColor ?? .clear
         backgroundColor = Color(uiColor)
+    }
+    
+    @MainActor private mutating func configureImages(image: Image) {
+        originalUIImage = image.getUIImage()
+        let beginImage = CIImage(image: originalUIImage!)
+        
+        let context = CIContext()
+        let currentFilter = CIFilter.sepiaTone()
+        
+        currentFilter.inputImage = beginImage
+        currentFilter.intensity = 1
     }
 
     private let wallpaper: Wallpaper
     private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
-    @State private var currentImage: UIImage?
+    private var originalUIImage: UIImage?
+    @State private var originalImage: Image?
     @State private var showToast = false
     @State private var showInfo = false
     @State private var showAlert = false
     @State private var imageSaved = false
     @State private var backgroundColor: Color = .black
+    @State private var showBlurSlider = false
+    @State private var blurValue: Double = 0
+    @State private var isEditingSlider = false
 
     var body: some View {
         ZStack(alignment: .center) { // Align the content to the bottom
-            AsyncImage(url: URL(string: wallpaper.path)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                case .failure:
-                    Text("REFRESH")
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                        .containerRelativeFrame(.horizontal)
-                        .ignoresSafeArea(.all)
-                        .onAppear(perform: {
-                            currentImage = ImageRenderer(content: image).uiImage
-                            setAverageColor()
-                        })
-
-                @unknown default:
-                    fatalError()
-                }
+            if let originalImage {
+                originalImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .containerRelativeFrame(.horizontal)
+                    .ignoresSafeArea(.all)
+                    .onAppear(perform: {
+                        setAverageColor()
+                        //                            configureImages(image: image)
+                    })
+            } else {
+                ProgressView()
             }
-
+            
             VStack {
                 if showToast {
                     Label("Image successfully saved to photos", systemImage: "info.circle")
@@ -98,50 +117,74 @@ struct ImageView: View {
                     GroupBox {
                         VStack(alignment: .leading) {
                             Text("Views: " + wallpaper.getViews())
+                                .foregroundStyle(.white)
                             Text("Favorites: " + wallpaper.getFavorites())
+                                .foregroundStyle(.white)
                             Text("Resolution: \(wallpaper.resolution)")
+                                .foregroundStyle(.white)
                             Text("File Size: " + wallpaper.getFileSize())
+                                .foregroundStyle(.white)
                         }
                     }
+                    .backgroundStyle(backgroundColor.opacity(0.85))
                     .transition(.scale)
                     .padding()
                 }
                 Spacer()
-                HStack {
-                    Button(action: {
-                        checkPhotoLibraryPermission { canSave in
-                            if canSave {
-                                saveImage(imageToSave: currentImage)
-                                imageSaved.toggle()
-                                withAnimation(.easeInOut) {
-                                    showToast.toggle()
+                VStack {
+                    if showBlurSlider {
+                        VStack {
+                            Slider(value: $blurValue, in: 0...100, step: 5) { isEditing in
+                                withAnimation {
+                                    isEditingSlider = isEditing
                                 }
-                            } else {
-                                showAlert = true
+                            }
+                            .foregroundStyle(.red)
+                            .backgroundStyle(.purple)
+                            .padding(.horizontal)
+                            
+                            Text("\(blurValue, specifier: "%.0f")%")
+                                .foregroundStyle(isEditingSlider ? .white : .gray)
+                        }
+                    }
+                    HStack {
+                        Button(action: {
+                            checkPhotoLibraryPermission { canSave in
+                                if canSave {
+                                    saveImage(imageToSave: originalUIImage)
+                                    imageSaved.toggle()
+                                    withAnimation(.easeInOut) {
+                                        showToast.toggle()
+                                    }
+                                } else {
+                                    showAlert = true
+                                }
+                            }
+                        }) {
+                            ImageViewTabItem(imageName: "arrow.down.circle", imageNameDesc: "Download")
+                        }
+                        Spacer()
+
+                        VStack {
+                            Button(action: { withAnimation { showBlurSlider.toggle() }}) {
+                                ImageViewTabItem(imageName: "camera.filters", imageNameDesc: "Blur")
                             }
                         }
-                    }) {
-                        ImageViewTabItem(imageName: "arrow.down.circle", imageNameDesc: "Download")
-                    }
-                    Spacer()
 
-                    Button(action: {
-                        // Handle save Favourite
-                    }) {
-                        ImageViewTabItem(imageName: "camera.filters", imageNameDesc: "Blur")
-                    }
+                        Spacer()
 
-                    Spacer()
-
-                    Button(action: { withAnimation { showInfo.toggle()} }) {
-                        ImageViewTabItem(imageName: "info.circle", imageNameDesc: "Info")
+                        Button(action: { withAnimation { showInfo.toggle()} }) {
+                            ImageViewTabItem(imageName: "info.circle", imageNameDesc: "Info")
+                        }
                     }
+                    .padding([.horizontal, .top])
                 }
-                .padding([.horizontal, .top])
                 .background(backgroundColor.opacity(0.7))
-                
             }
         }
+        .onAppear(perform: {
+            loadImageFromURL(wallpaperURL: wallpaper.path)
+        })
         .onTapGesture {
             if showInfo {
                 withAnimation {
