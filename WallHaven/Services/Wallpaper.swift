@@ -34,6 +34,34 @@ struct Wallpaper: Codable, Hashable {
         case dimensionX = "dimension_x", dimensionY = "dimension_y", resolution, ratio
         case fileSize = "file_size", fileType = "file_type", createdAt = "created_at", colors, path, thumbs
     }
+    
+    func formatNumber(_ number: Int) -> String {
+        let num = Double(number)
+        let thousand = num / 1000
+        let million = num / 1_000_000
+
+        if million >= 1.0 {
+            return "\(round(million*10)/10)M"
+        } else if thousand >= 1.0 {
+            return "\(round(thousand*10)/10)K"
+        } else {
+            return "\(number)"
+        }
+    }
+
+    
+    func getViews() -> String {
+        return formatNumber(views)
+    }
+
+    func getFavorites() -> String {
+        return formatNumber(favorites)
+    }
+
+    func getFileSize() -> String {
+        let fileSizeInMB = Double(fileSize) / 1_048_576 // Convert bytes to megabytes
+        return String(format: "%.2f MB", fileSizeInMB)
+    }
 }
 
 struct Thumbs: Codable, Hashable {

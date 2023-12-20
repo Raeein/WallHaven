@@ -43,13 +43,21 @@ struct ImageView: View {
             completion(false)
         }
     }
+    
+    private func setAverageColor() {
+        guard let currentImage else { return }
+        let uiColor = currentImage.averageColor ?? .clear
+        backgroundColor = Color(uiColor)
+    }
 
     private let wallpaper: Wallpaper
     private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
     @State private var currentImage: UIImage?
     @State private var showToast = false
+    @State private var showInfo = false
     @State private var showAlert = false
     @State private var imageSaved = false
+    @State private var backgroundColor: Color = .black
 
     var body: some View {
         ZStack(alignment: .center) { // Align the content to the bottom
@@ -69,6 +77,7 @@ struct ImageView: View {
                         .ignoresSafeArea(.all)
                         .onAppear(perform: {
                             currentImage = ImageRenderer(content: image).uiImage
+                            setAverageColor()
                         })
 
                 @unknown default:
@@ -84,6 +93,18 @@ struct ImageView: View {
                         .background(.blue)
                         .foregroundColor(Color.white)
                         .cornerRadius(10)
+                }
+                if showInfo {
+                    GroupBox {
+                        VStack(alignment: .leading) {
+                            Text("Views: " + wallpaper.getViews())
+                            Text("Favorites: " + wallpaper.getFavorites())
+                            Text("Resolution: \(wallpaper.resolution)")
+                            Text("File Size: " + wallpaper.getFileSize())
+                        }
+                    }
+                    .transition(.scale)
+                    .padding()
                 }
                 Spacer()
                 HStack {
@@ -107,46 +128,25 @@ struct ImageView: View {
                     Button(action: {
                         // Handle save Favourite
                     }) {
-                        VStack {
-                            Circle()
-                                .fill(Color(UIColor.lightGray))
-                                .frame(width: 32, height: 32)
-                                .overlay {
-                                    Image(systemName: "camera.filters")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                        .foregroundStyle(.black)
-                                }
-                            Menu("Boo") {
-                                ScrollView {
-                                    ForEach((1...100).reversed(), id: \.self) {
-                                        Button("\($0)") {
-                                            print("Hi")
-                                        }
-                                    }
-                                }
-                            }
-                            .menuOrder(.fixed)
-                            .foregroundStyle(.blue)
-                            .font(.footnote)
-                            .bold()
-                                
-                        }
-                        
+                        ImageViewTabItem(imageName: "camera.filters", imageNameDesc: "Blur")
                     }
 
                     Spacer()
 
-                    Button(action: {
-                        // Handle download info
-                    }) {
+                    Button(action: { withAnimation { showInfo.toggle()} }) {
                         ImageViewTabItem(imageName: "info.circle", imageNameDesc: "Info")
                     }
                 }
-
                 .padding([.horizontal, .top])
-                .background(.ultraThinMaterial)
+                .background(backgroundColor.opacity(0.7))
+                
+            }
+        }
+        .onTapGesture {
+            if showInfo {
+                withAnimation {
+                    showInfo.toggle()
+                }
             }
         }
         .alert("Enable Access", isPresented: $showAlert, actions: {
@@ -187,19 +187,14 @@ struct ImageViewTabItem: View {
 
     var body: some View {
         VStack {
-            Circle()
-                .fill(Color(UIColor.lightGray))
-                .frame(width: 32, height: 32)
-                .overlay {
-                    Image(systemName: imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 16, height: 16)
-                        .foregroundStyle(.black)
-                }
+            Image(systemName: imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+                .foregroundStyle(.white)
 
             Text(imageNameDesc)
-                .foregroundStyle(.blue)
+                .foregroundStyle(.white)
                 .font(.footnote)
                 .bold()
         }

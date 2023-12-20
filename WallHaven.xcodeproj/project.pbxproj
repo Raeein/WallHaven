@@ -27,6 +27,7 @@
 		279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6D2B278EF90082ACD1 /* ImageView.swift */; };
 		279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6F2B2799140082ACD1 /* ImageSaver.swift */; };
 		27C66DA42B31E52B00073E63 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66DA32B31E52B00073E63 /* FilterView.swift */; };
+		27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66DA52B3349E600073E63 /* UIImage+Extensions.swift */; };
 		27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909A2B12C9F80002F08C /* WallHavenApp.swift */; };
 		27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909C2B12C9F80002F08C /* ContentView.swift */; };
 		27D1909F2B12C9F80002F08C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909E2B12C9F80002F08C /* Item.swift */; };
@@ -65,6 +66,7 @@
 		279D4B6D2B278EF90082ACD1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		279D4B6F2B2799140082ACD1 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		27C66DA32B31E52B00073E63 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		27C66DA52B3349E600073E63 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		27D190972B12C9F80002F08C /* WallHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27D1909A2B12C9F80002F08C /* WallHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHavenApp.swift; sourceTree = "<group>"; };
 		27D1909C2B12C9F80002F08C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */,
+				27C66DA52B3349E600073E63 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */,
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
+				27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */,
 				27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);
