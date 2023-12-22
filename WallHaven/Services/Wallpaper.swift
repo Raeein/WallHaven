@@ -1,4 +1,15 @@
-import Foundation
+import SwiftUI
+
+protocol ImageSource {
+    func getImageData() -> ImageData
+}
+
+struct ImageData {
+    var id: String
+    var imageURL: String?
+    var localImageName: String?
+}
+
 
 struct WallpaperResponse: Codable {
     let data: [Wallpaper]
@@ -34,6 +45,21 @@ struct Wallpaper: Codable, Hashable {
         case dimensionX = "dimension_x", dimensionY = "dimension_y", resolution, ratio
         case fileSize = "file_size", fileType = "file_type", createdAt = "created_at", colors, path, thumbs
     }
+}
+
+struct Thumbs: Codable, Hashable {
+    let large: String
+    let original: String
+    let small: String
+}
+
+struct TagSearch: Codable, Hashable {
+    let id: Int
+    let tag: String
+}
+
+//MARK: - Helper functions
+extension Wallpaper {
     
     func formatNumber(_ number: Int) -> String {
         let num = Double(number)
@@ -64,13 +90,9 @@ struct Wallpaper: Codable, Hashable {
     }
 }
 
-struct Thumbs: Codable, Hashable {
-    let large: String
-    let original: String
-    let small: String
-}
+extension Wallpaper: ImageSource {
 
-struct TagSearch: Codable, Hashable {
-    let id: Int
-    let tag: String
+    func getImageData() -> ImageData {
+        return ImageData(id: self.id, imageURL: self.path, localImageName: nil)
+    }
 }

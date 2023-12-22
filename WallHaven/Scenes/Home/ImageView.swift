@@ -11,15 +11,15 @@ struct ImageView: View {
     
     private func loadImageFromURL(wallpaperURL: String) {
         guard let url = URL(string: wallpaperURL) else { return }
-
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data, let uiImage = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self.originalImage = Image(uiImage: uiImage)
-                    }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let uiImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.originalImage = Image(uiImage: uiImage)
                 }
-            }.resume()
-        }
+            }
+        }.resume()
+    }
 
 
     private func openPrivacySettings() {

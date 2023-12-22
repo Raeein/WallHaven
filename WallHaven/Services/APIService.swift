@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum APIError: Error {
     case unauthorized
@@ -146,4 +147,18 @@ struct APIService {
         print("URL is \(url.absoluteString)")
         return url
     }
+    
+
+    func loadImageFromURL(wallpaperURL: String) async -> Image? {
+        guard let url = URL(string: wallpaperURL) else { return nil }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let uiImage = UIImage(data: data) {
+                return Image(uiImage: uiImage.resized(toWidth: 800.0)!)
+            }
+        } catch { }
+        return nil
+    }
+    
 }

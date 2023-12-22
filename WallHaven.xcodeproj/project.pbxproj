@@ -44,7 +44,58 @@
 		27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 27DF44082B200E3000361BBC /* KeychainAccess */; };
 		27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E1F5CE2B2935D30067E96A /* KeychainService.swift */; };
 		27E1F5D12B2935E50067E96A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E1F5D02B2935E50067E96A /* APIService.swift */; };
+		27F7047A2B348CE3003E43ED /* WallHavenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704792B348CE3003E43ED /* WallHavenTests.swift */; };
+		27F704862B348E64003E43ED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F704852B348E64003E43ED /* WidgetKit.framework */; };
+		27F704882B348E64003E43ED /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F704872B348E64003E43ED /* SwiftUI.framework */; };
+		27F7048B2B348E65003E43ED /* WallHaven_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7048A2B348E64003E43ED /* WallHaven_WidgetBundle.swift */; };
+		27F7048D2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7048C2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift */; };
+		27F7048F2B348E65003E43ED /* WallHaven_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7048E2B348E65003E43ED /* WallHaven_Widget.swift */; };
+		27F704912B348E65003E43ED /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704902B348E65003E43ED /* AppIntent.swift */; };
+		27F704932B348E66003E43ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F704922B348E66003E43ED /* Assets.xcassets */; };
+		27F704972B348E66003E43ED /* WallHaven WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		27F7049D2B349085003E43ED /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7049C2B349085003E43ED /* Provider.swift */; };
+		27F7049F2B3490D9003E43ED /* SimpleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7049E2B3490D9003E43ED /* SimpleEntry.swift */; };
+		27F704A12B34911F003E43ED /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A02B34911F003E43ED /* WidgetView.swift */; };
+		27F704A22B349C96003E43ED /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E1F5D02B2935E50067E96A /* APIService.swift */; };
+		27F704A32B349CB4003E43ED /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B32B12D3A90002F08C /* Wallpaper.swift */; };
+		27F704A42B349CC1003E43ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44032B1F787200361BBC /* Constants.swift */; };
+		27F704A52B349CD5003E43ED /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
+		27F704A72B34A031003E43ED /* LocalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A62B34A031003E43ED /* LocalImage.swift */; };
+		27F704A82B34A1C2003E43ED /* LocalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A62B34A031003E43ED /* LocalImage.swift */; };
+		27F704AA2B35E9F5003E43ED /* UIImage+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */; };
+		27F704AB2B35EA36003E43ED /* UIImage+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27F7047B2B348CE3003E43ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27D1908F2B12C9F80002F08C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27D190962B12C9F80002F08C;
+			remoteInfo = WallHaven;
+		};
+		27F704952B348E66003E43ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27D1908F2B12C9F80002F08C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27F704832B348E64003E43ED;
+			remoteInfo = "WallHaven WidgetExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		27F7049B2B348E66003E43ED /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				27F704972B348E66003E43ED /* WallHaven WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		270720032B2B80F8004FDA06 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
@@ -83,6 +134,22 @@
 		27DF44052B1F7A2400361BBC /* APIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyView.swift; sourceTree = "<group>"; };
 		27E1F5CE2B2935D30067E96A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		27E1F5D02B2935E50067E96A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		27F704772B348CE3003E43ED /* WallHavenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallHavenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F704792B348CE3003E43ED /* WallHavenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHavenTests.swift; sourceTree = "<group>"; };
+		27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WallHaven WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F704852B348E64003E43ED /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		27F704872B348E64003E43ED /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		27F7048A2B348E64003E43ED /* WallHaven_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHaven_WidgetBundle.swift; sourceTree = "<group>"; };
+		27F7048C2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHaven_WidgetLiveActivity.swift; sourceTree = "<group>"; };
+		27F7048E2B348E65003E43ED /* WallHaven_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHaven_Widget.swift; sourceTree = "<group>"; };
+		27F704902B348E65003E43ED /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		27F704922B348E66003E43ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27F704942B348E66003E43ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27F7049C2B349085003E43ED /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		27F7049E2B3490D9003E43ED /* SimpleEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleEntry.swift; sourceTree = "<group>"; };
+		27F704A02B34911F003E43ED /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
+		27F704A62B34A031003E43ED /* LocalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalImage.swift; sourceTree = "<group>"; };
+		27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extenstions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +160,22 @@
 				27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */,
 				27DF44022B1F783700361BBC /* Security.framework in Frameworks */,
 				27071FFF2B2B7E71004FDA06 /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F704742B348CE3003E43ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F704812B348E64003E43ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F704882B348E64003E43ED /* SwiftUI.framework in Frameworks */,
+				27F704862B348E64003E43ED /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +209,7 @@
 				2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */,
 				27C66DA52B3349E600073E63 /* UIImage+Extensions.swift */,
 				27C66DA72B33694200073E63 /* Image+Extensions.swift */,
+				27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -184,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				27D190992B12C9F80002F08C /* WallHaven */,
+				27F704782B348CE3003E43ED /* WallHavenTests */,
+				27F704892B348E64003E43ED /* WallHaven Widget */,
 				27D190982B12C9F80002F08C /* Products */,
 				27DF44002B1F783700361BBC /* Frameworks */,
 			);
@@ -193,6 +279,8 @@
 			isa = PBXGroup;
 			children = (
 				27D190972B12C9F80002F08C /* WallHaven.app */,
+				27F704772B348CE3003E43ED /* WallHavenTests.xctest */,
+				27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,6 +334,8 @@
 			isa = PBXGroup;
 			children = (
 				27DF44012B1F783700361BBC /* Security.framework */,
+				27F704852B348E64003E43ED /* WidgetKit.framework */,
+				27F704872B348E64003E43ED /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,8 +347,33 @@
 				279D4B6F2B2799140082ACD1 /* ImageSaver.swift */,
 				27E1F5CE2B2935D30067E96A /* KeychainService.swift */,
 				27E1F5D02B2935E50067E96A /* APIService.swift */,
+				27F704A62B34A031003E43ED /* LocalImage.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		27F704782B348CE3003E43ED /* WallHavenTests */ = {
+			isa = PBXGroup;
+			children = (
+				27F704792B348CE3003E43ED /* WallHavenTests.swift */,
+			);
+			path = WallHavenTests;
+			sourceTree = "<group>";
+		};
+		27F704892B348E64003E43ED /* WallHaven Widget */ = {
+			isa = PBXGroup;
+			children = (
+				27F7048A2B348E64003E43ED /* WallHaven_WidgetBundle.swift */,
+				27F7048C2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift */,
+				27F7048E2B348E65003E43ED /* WallHaven_Widget.swift */,
+				27F704902B348E65003E43ED /* AppIntent.swift */,
+				27F7049C2B349085003E43ED /* Provider.swift */,
+				27F7049E2B3490D9003E43ED /* SimpleEntry.swift */,
+				27F704A02B34911F003E43ED /* WidgetView.swift */,
+				27F704922B348E66003E43ED /* Assets.xcassets */,
+				27F704942B348E66003E43ED /* Info.plist */,
+			);
+			path = "WallHaven Widget";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,10 +386,12 @@
 				27D190932B12C9F80002F08C /* Sources */,
 				27D190942B12C9F80002F08C /* Frameworks */,
 				27D190952B12C9F80002F08C /* Resources */,
+				27F7049B2B348E66003E43ED /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				27F704962B348E66003E43ED /* PBXTargetDependency */,
 			);
 			name = WallHaven;
 			packageProductDependencies = (
@@ -285,6 +402,41 @@
 			productReference = 27D190972B12C9F80002F08C /* WallHaven.app */;
 			productType = "com.apple.product-type.application";
 		};
+		27F704762B348CE3003E43ED /* WallHavenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F7047D2B348CE3003E43ED /* Build configuration list for PBXNativeTarget "WallHavenTests" */;
+			buildPhases = (
+				27F704732B348CE3003E43ED /* Sources */,
+				27F704742B348CE3003E43ED /* Frameworks */,
+				27F704752B348CE3003E43ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27F7047C2B348CE3003E43ED /* PBXTargetDependency */,
+			);
+			name = WallHavenTests;
+			productName = WallHavenTests;
+			productReference = 27F704772B348CE3003E43ED /* WallHavenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		27F704832B348E64003E43ED /* WallHaven WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F704982B348E66003E43ED /* Build configuration list for PBXNativeTarget "WallHaven WidgetExtension" */;
+			buildPhases = (
+				27F704802B348E64003E43ED /* Sources */,
+				27F704812B348E64003E43ED /* Frameworks */,
+				27F704822B348E64003E43ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WallHaven WidgetExtension";
+			productName = "WallHaven WidgetExtension";
+			productReference = 27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -292,11 +444,18 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					27D190962B12C9F80002F08C = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					27F704762B348CE3003E43ED = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 27D190962B12C9F80002F08C;
+					};
+					27F704832B348E64003E43ED = {
+						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
@@ -318,6 +477,8 @@
 			projectRoot = "";
 			targets = (
 				27D190962B12C9F80002F08C /* WallHaven */,
+				27F704762B348CE3003E43ED /* WallHavenTests */,
+				27F704832B348E64003E43ED /* WallHaven WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -338,6 +499,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		27F704752B348CE3003E43ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F704822B348E64003E43ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F704932B348E66003E43ED /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -346,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E1F5D12B2935E50067E96A /* APIService.swift in Sources */,
+				27F704A72B34A031003E43ED /* LocalImage.swift in Sources */,
 				275E935F2B2DFFC100CEF178 /* Tips.swift in Sources */,
 				279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */,
 				279D4B662B2649560082ACD1 /* TestView.swift in Sources */,
@@ -364,6 +541,7 @@
 				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */,
+				27F704AA2B35E9F5003E43ED /* UIImage+Extenstions.swift in Sources */,
 				27C66DA82B33694200073E63 /* Image+Extensions.swift in Sources */,
 				274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */,
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
@@ -374,7 +552,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		27F704732B348CE3003E43ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F7047A2B348CE3003E43ED /* WallHavenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F704802B348E64003E43ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F704A52B349CD5003E43ED /* URL+Extensions.swift in Sources */,
+				27F704A82B34A1C2003E43ED /* LocalImage.swift in Sources */,
+				27F7049F2B3490D9003E43ED /* SimpleEntry.swift in Sources */,
+				27F704A32B349CB4003E43ED /* Wallpaper.swift in Sources */,
+				27F7048B2B348E65003E43ED /* WallHaven_WidgetBundle.swift in Sources */,
+				27F704A12B34911F003E43ED /* WidgetView.swift in Sources */,
+				27F704912B348E65003E43ED /* AppIntent.swift in Sources */,
+				27F704A42B349CC1003E43ED /* Constants.swift in Sources */,
+				27F704AB2B35EA36003E43ED /* UIImage+Extenstions.swift in Sources */,
+				27F7048D2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift in Sources */,
+				27F7049D2B349085003E43ED /* Provider.swift in Sources */,
+				27F704A22B349C96003E43ED /* APIService.swift in Sources */,
+				27F7048F2B348E65003E43ED /* WallHaven_Widget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27F7047C2B348CE3003E43ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27D190962B12C9F80002F08C /* WallHaven */;
+			targetProxy = 27F7047B2B348CE3003E43ED /* PBXContainerItemProxy */;
+		};
+		27F704962B348E66003E43ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27F704832B348E64003E43ED /* WallHaven WidgetExtension */;
+			targetProxy = 27F704952B348E66003E43ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		27D190A52B12C9F90002F08C /* Debug */ = {
@@ -499,6 +718,7 @@
 		27D190A82B12C9F90002F08C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -531,6 +751,7 @@
 		27D190A92B12C9F90002F08C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -560,6 +781,104 @@
 			};
 			name = Release;
 		};
+		27F7047E2B348CE3003E43ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG79K3YA5K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raeeinbagheri.WallHavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallHaven.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WallHaven";
+			};
+			name = Debug;
+		};
+		27F7047F2B348CE3003E43ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG79K3YA5K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raeeinbagheri.WallHavenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallHaven.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WallHaven";
+			};
+			name = Release;
+		};
+		27F704992B348E66003E43ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG79K3YA5K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WallHaven Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WallHaven Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.raeeinbagheri.WallHaven.WallHaven-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		27F7049A2B348E66003E43ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG79K3YA5K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WallHaven Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WallHaven Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.raeeinbagheri.WallHaven.WallHaven-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -577,6 +896,24 @@
 			buildConfigurations = (
 				27D190A82B12C9F90002F08C /* Debug */,
 				27D190A92B12C9F90002F08C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27F7047D2B348CE3003E43ED /* Build configuration list for PBXNativeTarget "WallHavenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F7047E2B348CE3003E43ED /* Debug */,
+				27F7047F2B348CE3003E43ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27F704982B348E66003E43ED /* Build configuration list for PBXNativeTarget "WallHaven WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F704992B348E66003E43ED /* Debug */,
+				27F7049A2B348E66003E43ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
