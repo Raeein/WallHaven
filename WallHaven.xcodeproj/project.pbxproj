@@ -64,6 +64,7 @@
 		27F704A82B34A1C2003E43ED /* LocalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A62B34A031003E43ED /* LocalImage.swift */; };
 		27F704AA2B35E9F5003E43ED /* UIImage+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */; };
 		27F704AB2B35EA36003E43ED /* UIImage+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */; };
+		27F704AD2B361667003E43ED /* PreviewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704AC2B361667003E43ED /* PreviewViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		27F704A02B34911F003E43ED /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		27F704A62B34A031003E43ED /* LocalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalImage.swift; sourceTree = "<group>"; };
 		27F704A92B35E9F5003E43ED /* UIImage+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extenstions.swift"; sourceTree = "<group>"; };
+		27F704AC2B361667003E43ED /* PreviewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				275E935E2B2DFFC100CEF178 /* Tips.swift */,
 				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
 				27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */,
+				27F704AC2B361667003E43ED /* PreviewViews.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
 				27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */,
+				27F704AD2B361667003E43ED /* PreviewViews.swift in Sources */,
 				27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);

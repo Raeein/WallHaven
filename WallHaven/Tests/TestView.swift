@@ -6,6 +6,9 @@ struct ImageViewTest: View {
 
     var body: some View {
         ZStack(alignment: .center) {
+            NavigationLink("CLICK ME") {
+                Text("Im there")
+            }
             AsyncImage(url: URL(string: wallpaperPath)) { phase in
                 switch phase {
                 case .empty:
@@ -53,37 +56,45 @@ struct ImageViewTest: View {
     }
 }
 
-struct TestViewContextMenu: View {
-
+struct DestinationView: View {
     var body: some View {
-        HStack {
-            // Other views
-            Text("Example View 1")
-
-            // Button, that when tapped shows 3 options
-            Menu {
-                Button(action: {
-
-                }) {
-                    Label("Add", systemImage: "plus.circle")
-                }
-                Button(action: {
-
-                }) {
-                    Label("Delete", systemImage: "minus.circle")
-                }
-                Button(action: {
-
-                }) {
-                    Label("Edit", systemImage: "pencil.circle")
-                }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-            }
-        }
-        .frame(width: 300, height: 300, alignment: .center)
+        Color(.red)
+            .ignoresSafeArea()
+        Text("Destination View")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
     }
 }
+
+
+struct TestViewContextMenu: View {
+    
+    @State private var navigate = false
+    @State private var viewOpacity = 0.0
+
+    var body: some View {
+        
+        NavigationStack {
+            VStack {
+                Button("Go to Destination") {
+                    withAnimation {
+                        navigate = true
+                        viewOpacity = 1.0
+                    }
+                }
+            }
+            .overlay {
+                if navigate {
+                    DestinationView()
+                        .opacity(viewOpacity)
+                }
+                
+            }
+            
+        }
+    }
+}
+
 
 // #Preview {
 //    ImageViewTest()

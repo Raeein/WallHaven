@@ -89,9 +89,15 @@ struct ImageView: View {
         filteredImage = Image(uiImage: uiImage)
         filteredUIImage = filteredImage?.getUIImage()
     }
+    
+    enum PreviewType {
+        case lockScreen
+        case homeScreen
+    }
 
     private let wallpaper: Wallpaper
     private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
+    
     @State private var originalUIImage: UIImage?
     @State private var originalImage: Image?
     @State private var filteredImage: Image?
@@ -104,6 +110,11 @@ struct ImageView: View {
     @State private var showBlurSlider = false
     @State private var blurValue: Double = 0
     @State private var isEditingSlider = false
+    @State private var showPreviews = false
+    @State private var showLockScreen = false
+    @State private var showHomeScreen = false
+    @State private var viewOpacity = 0.0
+    @State private var previewType: PreviewType?
 
     var body: some View {
         ZStack(alignment: .center) {
@@ -178,6 +189,28 @@ struct ImageView: View {
                                 .foregroundStyle(isEditingSlider ? .white : .gray)
                         }
                     }
+                    if showPreviews {
+                        VStack{
+                            Button(action: {
+                                withAnimation {
+                                    showHomeScreen = true
+                                    viewOpacity = 1
+                                }
+                            }) {
+                                ImageViewTabItem(imageName: "house.fill")
+                            }
+                            .padding()
+                            
+                            Button(action: {
+                                withAnimation {
+                                    showLockScreen = true
+                                    viewOpacity = 1
+                                }
+                            }) {
+                                ImageViewTabItem(imageName: "lock.fill")
+                            }
+                        }
+                    }
                     HStack {
                         Button(action: {
                             checkPhotoLibraryPermission { canSave in
@@ -194,16 +227,25 @@ struct ImageView: View {
                         }) {
                             ImageViewTabItem(imageName: "arrow.down.circle", imageNameDesc: "Download")
                         }
+                        
                         Spacer()
+                    
 
-                        VStack {
-                            Button(action: { withAnimation { showBlurSlider.toggle() }}) {
-                                ImageViewTabItem(imageName: "camera.filters", imageNameDesc: "Blur")
+                            Button(action: { withAnimation { showPreviews.toggle() }}) {
+                                ImageViewTabItem(imageName: "eye.fill", imageNameDesc: "Preview")
                             }
+                            
+            
+                        Spacer()
+                        
+                        
+                        Button(action: { withAnimation { showBlurSlider.toggle() }}) {
+                            ImageViewTabItem(imageName: "camera.filters", imageNameDesc: "Blur")
                         }
+                        
 
                         Spacer()
-
+                        
                         Button(action: { withAnimation { showInfo.toggle()} }) {
                             ImageViewTabItem(imageName: "info.circle", imageNameDesc: "Info")
                         }
@@ -213,6 +255,32 @@ struct ImageView: View {
                 .background(backgroundColor.opacity(0.7))
             }
         }
+        .overlay(content: {
+            if showLockScreen {
+                LockScreenPreview(wallpaperImage: originalImage!)
+                    .opacity(viewOpacity)
+                    .onTapGesture {
+                        withAnimation {
+                            showPreviews.toggle()
+                            showLockScreen.toggle()
+                            viewOpacity = 0.0
+                        }
+                    }
+            }
+            if showHomeScreen {
+                HomeScreenPreview(wallpaperImage: originalImage!)
+                    .opacity(viewOpacity)
+                    .onTapGesture {
+                        withAnimation {
+                            showPreviews.toggle()
+                            showHomeScreen.toggle()
+                            viewOpacity = 0.0
+                        }
+                    }
+            }
+            
+            
+        })
         .onAppear(perform: {
             loadImageFromURL(wallpaperURL: wallpaper.path)
         })
@@ -220,6 +288,12 @@ struct ImageView: View {
             if showInfo {
                 withAnimation {
                     showInfo.toggle()
+                }
+            }
+            if showPreviews {
+                withAnimation {
+                    showInfo.toggle()
+                    previewType = nil
                 }
             }
         }
@@ -252,9 +326,9 @@ struct ImageView: View {
 struct ImageViewTabItem: View {
 
     private let imageName: String
-    private let imageNameDesc: String
+    private let imageNameDesc: String?
 
-    init(imageName: String, imageNameDesc: String) {
+    init(imageName: String, imageNameDesc: String? = nil) {
         self.imageName = imageName
         self.imageNameDesc = imageNameDesc
     }
@@ -266,11 +340,12 @@ struct ImageViewTabItem: View {
                 .scaledToFit()
                 .frame(width: 24, height: 24)
                 .foregroundStyle(.white)
-
-            Text(imageNameDesc)
-                .foregroundStyle(.white)
-                .font(.footnote)
-                .bold()
+            if let imageNameDesc {
+                Text(imageNameDesc)
+                    .foregroundStyle(.white)
+                    .font(.footnote)
+                    .bold()
+            }
         }
     }
 }
