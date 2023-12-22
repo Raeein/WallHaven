@@ -1,10 +1,3 @@
-//
-//  WallHaven_WidgetBundle.swift
-//  WallHaven Widget
-//
-//  Created by Raeein Bagheri on 2023-12-21.
-//
-
 import WidgetKit
 import SwiftUI
 

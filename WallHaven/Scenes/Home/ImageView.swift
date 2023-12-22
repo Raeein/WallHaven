@@ -31,8 +31,7 @@ struct ImageView: View {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
-    func saveImage(imageToSave: UIImage?) {
-        guard let imageToSave = imageToSave else { return }
+    func saveImage(imageToSave: UIImage) {
         let imageSaver = ImageSaver()
         imageSaver.writeToPhotoAlbum(image: imageToSave)
     }
@@ -63,21 +62,40 @@ struct ImageView: View {
         backgroundColor = Color(uiColor)
     }
     
-    @MainActor private mutating func configureImages(image: Image) {
-        originalUIImage = image.getUIImage()
+    @MainActor private func applyBlueFilter(image: Image, radius: Float) {
+        guard radius != 0.0 else {
+            filteredImage = nil
+            filteredUIImage = nil
+            return
+        }
+        if originalUIImage == nil {
+            originalUIImage = image.getUIImage()
+        }
         let beginImage = CIImage(image: originalUIImage!)
         
         let context = CIContext()
-        let currentFilter = CIFilter.sepiaTone()
+        let currentFilter = CIFilter.gaussianBlur()
         
         currentFilter.inputImage = beginImage
-        currentFilter.intensity = 1
+        currentFilter.radius = radius
+        
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        
+        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
+
+        let uiImage = UIImage(cgImage: cgImage)
+
+        filteredImage = Image(uiImage: uiImage)
+        filteredUIImage = filteredImage?.getUIImage()
     }
 
     private let wallpaper: Wallpaper
     private let alertMessage = "To save photos, please allow photos access to WallHaven in your iPhone settings"
-    private var originalUIImage: UIImage?
+    @State private var originalUIImage: UIImage?
     @State private var originalImage: Image?
+    @State private var filteredImage: Image?
+    @State private var filteredUIImage: UIImage?
     @State private var showToast = false
     @State private var showInfo = false
     @State private var showAlert = false
@@ -88,8 +106,18 @@ struct ImageView: View {
     @State private var isEditingSlider = false
 
     var body: some View {
-        ZStack(alignment: .center) { // Align the content to the bottom
-            if let originalImage {
+        ZStack(alignment: .center) {
+            if let filteredImage {
+                filteredImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .containerRelativeFrame(.horizontal)
+                    .ignoresSafeArea(.all)
+                    .onAppear(perform: {
+                        setAverageColor()
+                    })
+            } else if let originalImage {
                 originalImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -98,7 +126,7 @@ struct ImageView: View {
                     .ignoresSafeArea(.all)
                     .onAppear(perform: {
                         setAverageColor()
-                        //                            configureImages(image: image)
+                        originalUIImage = originalImage.getUIImage()
                     })
             } else {
                 ProgressView()
@@ -132,18 +160,21 @@ struct ImageView: View {
                 }
                 Spacer()
                 VStack {
-                    if showBlurSlider {
+                    if let originalImage, showBlurSlider {
                         VStack {
-                            Slider(value: $blurValue, in: 0...100, step: 5) { isEditing in
+                            Slider(value: $blurValue, in: 0...25, step: 1) { isEditing in
                                 withAnimation {
                                     isEditingSlider = isEditing
+                                    if !isEditing {
+                                        applyBlueFilter(image: originalImage, radius: Float(blurValue))
+                                    }
                                 }
                             }
                             .foregroundStyle(.red)
                             .backgroundStyle(.purple)
                             .padding(.horizontal)
                             
-                            Text("\(blurValue, specifier: "%.0f")%")
+                            Text("\(blurValue * 4, specifier: "%.0f")%")
                                 .foregroundStyle(isEditingSlider ? .white : .gray)
                         }
                     }
@@ -151,7 +182,7 @@ struct ImageView: View {
                         Button(action: {
                             checkPhotoLibraryPermission { canSave in
                                 if canSave {
-                                    saveImage(imageToSave: originalUIImage)
+                                    saveImage(imageToSave: filteredUIImage ?? originalUIImage!)
                                     imageSaved.toggle()
                                     withAnimation(.easeInOut) {
                                         showToast.toggle()
