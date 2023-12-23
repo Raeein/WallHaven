@@ -69,8 +69,38 @@ struct LockScreenPreview: View {
     }
 }
 
+struct AppIcon {
+    let imageName: String
+    let appName: String
+}
+
+
+struct AppIconView: View {
+    let appIcon: AppIcon
+
+    var body: some View {
+        VStack {
+            Image(appIcon.imageName, bundle: .main)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 60, height: 60)
+
+            Text(appIcon.appName)
+                .font(.caption)
+        }
+    }
+}
+
 struct HomeScreenPreview: View {
     var wallpaperImage: Image
+    let appIcons = [
+        AppIcon(imageName: "app-store", appName: "App Store"),
+        AppIcon(imageName: "apple-music", appName: "Music"),
+        AppIcon(imageName: "apple-store", appName: "Store"),
+        AppIcon(imageName: "apple-tv", appName: "TV"),
+        // Add more icons here...
+    ]
+    let columns = 4
 
     var body: some View {
         ZStack {
@@ -78,7 +108,34 @@ struct HomeScreenPreview: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-            // Add mock app icons and home screen elements
+                .containerRelativeFrame(.horizontal)
+  
+            VStack(spacing: 20) {
+                Spacer()
+                ForEach(0..<appIcons.count, id: \.self) { index in
+                    if index % columns == 0 { // Start of a new row
+                        HStack(spacing: 20) {
+                            ForEach(0..<columns, id: \.self) { column in
+                                let iconIndex = index + column
+                                if iconIndex < appIcons.count {
+                                    AppIconView(appIcon: appIcons[iconIndex])
+                                }
+                            }
+                        }
+                    }
+                }
+                HStack {
+                    Color(.gray)
+                    Color(.gray)
+                }
+                GroupBox {
+                    Image("Gear")
+                }.padding()
+                
+            }
+            
+            Spacer()
+            
         }
     }
 }

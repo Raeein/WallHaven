@@ -53,6 +53,9 @@ struct RootView: View {
                         .tabItem { Label("Settings", systemImage: "gear") }
                         .tag(3)
                 })
+                .onAppear(perform: {
+                    NotificationService().checkAndScheduleNotification()
+                })
             }
         }
         .task {
