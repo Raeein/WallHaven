@@ -10,32 +10,18 @@ enum APIError: Error {
     case other(Error)
 }
 
-enum Purity: String {
+enum Purity: String, CaseIterable, Hashable, Identifiable {
+    var id : String { UUID().uuidString }
     case sfw
     case sketchy
-    case nsfw
-    
-    
-    static func purityString(sfw: Bool, sketchy: Bool, nsfw: Bool) -> String {
-        let sfwValue = sfw ? "1" : "0"
-        let sketchyValue = sketchy ? "1" : "0"
-        let nsfwValue = nsfw ? "1" : "0"
-        return sfwValue + sketchyValue + nsfwValue
-    }
-    
+    case nsfw    
 }
 
-enum Category: String {
+enum Category: String, CaseIterable, Hashable, Identifiable {
+    var id : String { UUID().uuidString }
     case general
     case anime
     case people
-    
-    static func categoryString(general: Bool, anime: Bool, people: Bool) -> String {
-        let generalValue = general ? "1" : "0"
-        let animeValue = anime ? "1" : "0"
-        let peopleValue = people ? "1" : "0"
-        return generalValue + animeValue + peopleValue
-    }
 }
 
 enum Sorting: String {
@@ -62,12 +48,78 @@ enum TopRange: String {
     case oneYear = "1y"
 }
 
-struct WallpaperConfigs {
-    let page: Int? = nil
+class WallpaperConfigs: ObservableObject {
+    @Published var page: Int? = nil
+    @Published var query: String? = nil
+    @Published var sorting: Sorting = .random
+    @Published var order: Order = .desc
+    @Published var categories: [Category]? = nil
+    @Published var purities: [Purity]? = nil
+    
     let apiKey: String? = nil
-    var query: String? = nil
-    let sorting: Sorting = .random
     let isSearchView: Bool = false
+    
+    func addCategory(of newCategory: Category) {
+        guard var categories else { return }
+
+        if !categories.contains(newCategory) {
+            categories.append(newCategory)
+        }
+    }
+    
+    func getCategoryString() -> String {
+        guard let categories else { return "000" }
+        var result = ""
+        
+        result.append(categories.contains(.general) ? "1" : "0")
+        result.append(categories.contains(.anime) ? "1" : "0")
+        result.append(categories.contains(.people) ? "1" : "0")
+        
+        return result
+    }
+    
+    func addPurity(of newPurity: Purity) {
+        guard var purities else { return }
+
+        if !purities.contains(newPurity) {
+            purities.append(newPurity)
+        }
+    }
+    
+    func getPurityString() -> String {
+        guard let purities else { return "000" }
+        var result = ""
+        
+        result.append(purities.contains(.sfw) ? "1" : "0")
+        result.append(purities.contains(.sketchy) ? "1" : "0")
+        result.append(purities.contains(.nsfw) ? "1" : "0")
+        
+        return result
+    }
+    
+    func isSFWSelected() -> Bool {
+        return purities?.contains(.sfw) ?? false
+    }
+    
+    func isNSFWSelected() -> Bool {
+        return purities?.contains(.nsfw) ?? false
+    }
+    
+    func isSketchySelected() -> Bool {
+        return purities?.contains(.sketchy) ?? false
+    }
+    
+    func isPeopleSelected() -> Bool {
+        return categories?.contains(.people) ?? false
+    }
+    
+    func isGeneralSelected() -> Bool {
+        return categories?.contains(.general) ?? false
+    }
+    
+    func isAnimeSelected() -> Bool {
+        return categories?.contains(.anime) ?? false
+    }
 }
 
 

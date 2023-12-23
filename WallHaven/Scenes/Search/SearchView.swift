@@ -9,7 +9,7 @@ struct SearchView: View {
     @State private var showWallpapers = false
     @State private var showFilterSheet = false
     
-    @State private var configs = WallpaperConfigs()
+    @StateObject private var configs = WallpaperConfigs()
     
     @Environment(\.modelContext) private var modelContext
     
@@ -41,7 +41,7 @@ struct SearchView: View {
         NavigationStack {
             Group {
                 if showWallpapers {
-                    ImageGridView(configs: $configs)
+                    ImageGridView(configs: configs)
                 } else {
                     VStack(alignment: .leading) {
                         List {
@@ -60,9 +60,6 @@ struct SearchView: View {
                                     }
                                 }
                                 .onDelete(perform: deleteSearchItems)
-//                                .onDelete(perform: { indexSet in
-//                                    deleteSearchItems(offsets: indexSet)
-//                                })
                             }
                         }
                         .listStyle(.sidebar)
@@ -87,9 +84,14 @@ struct SearchView: View {
                 }
             }
             .sheet(isPresented: $showFilterSheet, content: {
-                FilterView()
+                FilterView(configs: configs)
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.hidden)
+                    .onDisappear(perform: {
+                        if (configs.query != nil) && configs.query != "" {
+                            showWallpapers = true
+                        }
+                    })
             })
         }
         .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")

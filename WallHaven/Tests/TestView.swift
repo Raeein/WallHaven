@@ -76,20 +76,11 @@ struct TestViewContextMenu: View {
         
         NavigationStack {
             VStack {
-                Button("Go to Destination") {
-                    withAnimation {
-                        navigate = true
-                        viewOpacity = 1.0
-                    }
+                List(Purity.allCases, id: \.self) { enumCase in
+                    Text("\(enumCase.rawValue)")
                 }
             }
-            .overlay {
-                if navigate {
-                    DestinationView()
-                        .opacity(viewOpacity)
-                }
-                
-            }
+       
             
         }
     }

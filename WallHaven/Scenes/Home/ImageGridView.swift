@@ -9,7 +9,7 @@ struct ImageGridView: View {
 
     @AppStorage("imageQuality") private var imageQuality: ImageQuality = .low
     @StateObject var viewModel = WallpaperViewModel()
-    @Binding var configs: WallpaperConfigs
+    @ObservedObject var configs: WallpaperConfigs
     @State private var wallpaperShownCount = 0
 
     private let apiService = APIService()
