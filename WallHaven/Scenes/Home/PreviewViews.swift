@@ -87,9 +87,11 @@ struct AppIconView: View {
 
             Text(appIcon.appName)
                 .font(.caption)
+                .foregroundStyle(.white)
         }
     }
 }
+
 
 struct HomeScreenPreview: View {
     var wallpaperImage: Image
@@ -98,10 +100,16 @@ struct HomeScreenPreview: View {
         AppIcon(imageName: "apple-music", appName: "Music"),
         AppIcon(imageName: "apple-store", appName: "Store"),
         AppIcon(imageName: "apple-tv", appName: "TV"),
-        // Add more icons here...
+        AppIcon(imageName: "files", appName: "Files"),
+        AppIcon(imageName: "ios-message", appName: "Messages"),
+        AppIcon(imageName: "mail", appName: "Mail"),
+        AppIcon(imageName: "notes", appName: "Notes"),
+        AppIcon(imageName: "photos", appName: "Photos"),
+        AppIcon(imageName: "settings", appName: "Settings"),
+        AppIcon(imageName: "weather", appName: "Weather"),
     ]
     let columns = 4
-
+    
     var body: some View {
         ZStack {
             wallpaperImage
@@ -109,34 +117,53 @@ struct HomeScreenPreview: View {
                 .scaledToFill()
                 .ignoresSafeArea()
                 .containerRelativeFrame(.horizontal)
-  
+            
             VStack(spacing: 20) {
-                Spacer()
-                ForEach(0..<appIcons.count, id: \.self) { index in
-                    if index % columns == 0 { // Start of a new row
-                        HStack(spacing: 20) {
-                            ForEach(0..<columns, id: \.self) { column in
-                                let iconIndex = index + column
-                                if iconIndex < appIcons.count {
-                                    AppIconView(appIcon: appIcons[iconIndex])
-                                }
-                            }
-                        }
+                
+                VStack(alignment: .leading) {
+                    HStack(spacing: 20) {
+                        AppIconView(appIcon: appIcons[0])
+                        AppIconView(appIcon: appIcons[1])
+                        AppIconView(appIcon: appIcons[2])
+                        AppIconView(appIcon: appIcons[3])
+                    }
+                    
+                    HStack(spacing: 20) {
+                        AppIconView(appIcon: appIcons[4])
+                        AppIconView(appIcon: appIcons[5])
+                        AppIconView(appIcon: appIcons[6])
+                        AppIconView(appIcon: appIcons[7])
+                    }
+                    HStack(spacing: 20) {
+                        AppIconView(appIcon: appIcons[8])
+                        AppIconView(appIcon: appIcons[9])
+                        AppIconView(appIcon: appIcons[10])
                     }
                 }
-                HStack {
-                    Color(.gray)
-                    Color(.gray)
-                }
-                GroupBox {
-                    Image("Gear")
-                }.padding()
+                .padding(.top)
                 
+                Spacer()
+                GroupBox {
+                    HStack(spacing: 20) {
+                        AppIconView(appIcon: appIcons[7])
+                        AppIconView(appIcon: appIcons[8])
+                        AppIconView(appIcon: appIcons[9])
+                        AppIconView(appIcon: appIcons[10])
+                    }
+                    .padding()
+                    
+                }
+                .backgroundStyle(.bar)
+                .clipShape(.rect(cornerRadius: 64.0))
+                .opacity(0.8)
+                .padding()
             }
-            
-            Spacer()
-            
         }
+    
+            
+            
+        
+        
     }
 }
 
