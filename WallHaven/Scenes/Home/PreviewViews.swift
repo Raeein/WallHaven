@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LockScreenPreview: View {
     var wallpaperImage: Image
-
+    
     var body: some View {
         ZStack {
             wallpaperImage
@@ -12,7 +12,7 @@ struct LockScreenPreview: View {
                 .containerRelativeFrame(.horizontal)
             
             VStack {
-
+                
                 Image(systemName: "lock.fill")
                     .resizable()
                     .scaledToFit()
@@ -21,14 +21,14 @@ struct LockScreenPreview: View {
                 Text("9:41 AM")
                     .font(.system(size: 60, weight: .medium, design: .default))
                     .foregroundColor(.white)
-
+                
                 Text("Monday, January 1")
                     .font(.system(size: 20, weight: .regular, design: .default))
                     .foregroundColor(.white)
                 
                 Spacer()
-
-
+                
+                
                 HStack {
                     Button(action: {
                         // Action for Flashlight
@@ -77,14 +77,14 @@ struct AppIcon {
 
 struct AppIconView: View {
     let appIcon: AppIcon
-
+    
     var body: some View {
         VStack {
             Image(appIcon.imageName, bundle: .main)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 60)
-
+            
             Text(appIcon.appName)
                 .font(.caption)
                 .foregroundStyle(.white)
@@ -158,12 +158,7 @@ struct HomeScreenPreview: View {
                 .opacity(0.8)
                 .padding()
             }
-        }
-    
-            
-            
-        
-        
+        } 
     }
 }
 

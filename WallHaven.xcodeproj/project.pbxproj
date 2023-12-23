@@ -30,8 +30,7 @@
 		27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66DA52B3349E600073E63 /* UIImage+Extensions.swift */; };
 		27C66DA82B33694200073E63 /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66DA72B33694200073E63 /* Image+Extensions.swift */; };
 		27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909A2B12C9F80002F08C /* WallHavenApp.swift */; };
-		27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909C2B12C9F80002F08C /* ContentView.swift */; };
-		27D1909F2B12C9F80002F08C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909E2B12C9F80002F08C /* Item.swift */; };
+		27D1909F2B12C9F80002F08C /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1909E2B12C9F80002F08C /* SearchItem.swift */; };
 		27D190A12B12C9F90002F08C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D190A02B12C9F90002F08C /* Assets.xcassets */; };
 		27D190A42B12C9F90002F08C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D190A32B12C9F90002F08C /* Preview Assets.xcassets */; };
 		27D190AB2B12CBF50002F08C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190AA2B12CBF50002F08C /* RootView.swift */; };
@@ -123,8 +122,7 @@
 		27C66DA72B33694200073E63 /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
 		27D190972B12C9F80002F08C /* WallHaven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallHaven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27D1909A2B12C9F80002F08C /* WallHavenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallHavenApp.swift; sourceTree = "<group>"; };
-		27D1909C2B12C9F80002F08C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		27D1909E2B12C9F80002F08C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		27D1909E2B12C9F80002F08C /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		27D190A02B12C9F90002F08C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27D190A32B12C9F90002F08C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		27D190AA2B12CBF50002F08C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -232,6 +230,7 @@
 		274AFE082B2F40A900FFFC16 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				27D1909E2B12C9F80002F08C /* SearchItem.swift */,
 				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
 				27C66DA32B31E52B00073E63 /* FilterView.swift */,
 			);
@@ -300,7 +299,6 @@
 				2711F8F32B2CB727003E9B6F /* Extensions */,
 				270720002B2B7EDB004FDA06 /* Lottie */,
 				27E1F5CD2B29356E0067E96A /* Services */,
-				27D190B02B12CDA60002F08C /* SwiftDataExample */,
 				27D190A02B12C9F90002F08C /* Assets.xcassets */,
 				27D190A22B12C9F90002F08C /* Preview Content */,
 				279D4B692B27731A0082ACD1 /* Tests */,
@@ -314,15 +312,6 @@
 				27D190A32B12C9F90002F08C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		27D190B02B12CDA60002F08C /* SwiftDataExample */ = {
-			isa = PBXGroup;
-			children = (
-				27D1909C2B12C9F80002F08C /* ContentView.swift */,
-				27D1909E2B12C9F80002F08C /* Item.swift */,
-			);
-			path = SwiftDataExample;
 			sourceTree = "<group>";
 		};
 		27DF43FD2B1F742200361BBC /* Settings */ = {
@@ -532,7 +521,6 @@
 				275E935F2B2DFFC100CEF178 /* Tips.swift in Sources */,
 				279D4B6E2B278EF90082ACD1 /* ImageView.swift in Sources */,
 				279D4B662B2649560082ACD1 /* TestView.swift in Sources */,
-				27D1909D2B12C9F80002F08C /* ContentView.swift in Sources */,
 				279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */,
 				27D190B22B12CDE60002F08C /* HomeView.swift in Sources */,
 				27D190B42B12D3A90002F08C /* Wallpaper.swift in Sources */,
@@ -544,7 +532,7 @@
 				27D190AB2B12CBF50002F08C /* RootView.swift in Sources */,
 				2707200F2B2B9183004FDA06 /* WebView.swift in Sources */,
 				27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */,
-				27D1909F2B12C9F80002F08C /* Item.swift in Sources */,
+				27D1909F2B12C9F80002F08C /* SearchItem.swift in Sources */,
 				27D1909B2B12C9F80002F08C /* WallHavenApp.swift in Sources */,
 				27E1F5CF2B2935D30067E96A /* KeychainService.swift in Sources */,
 				27F704AA2B35E9F5003E43ED /* UIImage+Extenstions.swift in Sources */,

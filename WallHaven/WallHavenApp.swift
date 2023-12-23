@@ -14,22 +14,18 @@ struct WallHavenApp: App {
 
     @AppStorage("isDarkModeEnabled") private var isDarkModeEnabled = false
 
-    init() {
-//        adjustVisualAppearance()
-    }
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            SearchItem.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-//    var sharedModelContainer: ModelContainer = {
-//        let schema = Schema([
-//            Item.self,
-//        ])
-//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-//
-//        do {
-//            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-//        } catch {
-//            fatalError("Could not create ModelContainer: \(error)")
-//        }
-//    }()
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
 
     var body: some Scene {
         WindowGroup {
@@ -43,7 +39,7 @@ struct WallHavenApp: App {
                     ])
                 }
         }
-//        .modelContainer(sharedModelContainer)
+        .modelContainer(sharedModelContainer)
     }
 
     private func adjustVisualAppearance() {

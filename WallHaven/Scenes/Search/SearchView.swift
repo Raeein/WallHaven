@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct SearchView: View {
     @State private var searchText = ""
@@ -10,18 +11,31 @@ struct SearchView: View {
     
     @State private var configs = WallpaperConfigs()
     
+    @Environment(\.modelContext) private var modelContext
+    
     // TODO: Replace with something idk - TBD
     private var popularSearches = [
         "First",
         "Second",
         "Third"
     ]
-    // TODO: Replace with swift Data
-    @State private var recentSearches = [
-        "Fourth",
-        "Fifth",
-        "Sixth"
-    ]
+
+    @Query(sort: \SearchItem.timestamp) private var recentSearches: [SearchItem]
+    
+    private func addSearchItem(searchText: String) {
+        withAnimation {
+            let newItem = SearchItem(searchText: searchText, timestamp: Date())
+            modelContext.insert(newItem)
+        }
+    }
+
+    private func deleteSearchItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(recentSearches[index])
+            }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -41,13 +55,14 @@ struct SearchView: View {
                             
                             Section("Recent searches", isExpanded: $isRecentSearchesExpanded) {
                                 ForEach(recentSearches, id: \.self) { item in
-                                    NavigationLink(destination: Text("Detail View for \(item)")) {
-                                        Text(item)
+                                    NavigationLink(destination: Text("Detail View for \(item.searchText)")) {
+                                        Text(item.searchText)
                                     }
                                 }
-                                .onDelete(perform: { indexSet in
-                                    recentSearches.remove(atOffsets: indexSet)
-                                })
+                                .onDelete(perform: deleteSearchItems)
+//                                .onDelete(perform: { indexSet in
+//                                    deleteSearchItems(offsets: indexSet)
+//                                })
                             }
                         }
                         .listStyle(.sidebar)
@@ -79,6 +94,7 @@ struct SearchView: View {
         }
         .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
         .onSubmit(of: .search) {
+            addSearchItem(searchText: searchText)
             withAnimation {
                 configs.query = searchText
                 showWallpapers = true
@@ -91,5 +107,6 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+            .modelContainer(for: SearchItem.self, inMemory: true)
     }
 }
