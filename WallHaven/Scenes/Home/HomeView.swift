@@ -16,12 +16,6 @@ struct HomeView: View {
             ImageGridView(configs: configs, refreshWallpapers: $refreshWallpapers)
                 .toolbar(content: {
                     ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
-                        Button(action: {}) {
-                            Label("Filter", systemImage: "line.3.horizontal.decrease")
-                                .foregroundStyle(.blue)
-                        }
-                        .buttonStyle(.plain)
-                        .popoverTip(filterTip)
                         
                         Button(action: {
                             refreshWallpapers = true
@@ -32,13 +26,21 @@ struct HomeView: View {
                         }
                         .buttonStyle(.plain)
                         .popoverTip(refreshTip)
+                        
+                        Button(action: {}) {
+                            Label("Filter", systemImage: "line.3.horizontal.decrease")
+                                .foregroundStyle(.blue)
+                        }
+                        .buttonStyle(.plain)
+                        .popoverTip(filterTip)
+              
                     }
                 })
                 .navigationTitle("Home")
         }
     }
 }
-//
+
 //#Preview {
 //    HomeView(wallpapers: LocalImage.getSampleImages())
 //        .task {
