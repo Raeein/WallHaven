@@ -20,7 +20,7 @@ struct Provider: AppIntentTimelineProvider {
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
         
-        let wallpapers = await APIService().getWallpapers()
+        let wallpapers = await APIService.shared.getWallpapers()
 
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
@@ -28,7 +28,7 @@ struct Provider: AppIntentTimelineProvider {
             let entry = await SimpleEntry(
                 date: entryDate,
                 configuration: configuration,
-                wallpaper: APIService().loadImageFromURL(wallpaperURL: wallpapers[hourOffset].path)
+                wallpaper: APIService.shared.loadImageFromURL(wallpaperURL: wallpapers[hourOffset].path, resizeToWidth: 800)
             )
             entries.append(entry)
         }

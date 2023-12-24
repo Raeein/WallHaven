@@ -62,7 +62,9 @@ struct Tag {
     let tagName: String
 }
 
-struct APIService {
+class APIService {
+    
+    static let shared = APIService()
     
     func getWallpapers(configs: WallpaperConfigs = WallpaperConfigs(), apiKey: String? = nil) async -> [Wallpaper] {
         var wallpapers = [Wallpaper]()
@@ -191,17 +193,35 @@ struct APIService {
         return url
     }
     
+    #if os(iOS)
+    func loadImageFromURL(wallpaperURL: String, resizeToWidth: Int? = nil) async -> Image? {
+        guard let url = URL(string: wallpaperURL) else { return nil }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if var uiImage = UIImage(data: data) {
+                if let resizeToWidth {
+                    uiImage = uiImage.resized(toWidth: 800.0)!
+                }
+                return Image(uiImage: uiImage)
+            }
+        } catch { }
+        return nil
+    }
+    #endif
     
+    #if os(macOS)
     func loadImageFromURL(wallpaperURL: String) async -> Image? {
         guard let url = URL(string: wallpaperURL) else { return nil }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            if let uiImage = UIImage(data: data) {
-                return Image(uiImage: uiImage.resized(toWidth: 800.0)!)
+            if var nsImage = NSImage(data: data) {
+                return Image(nsImage: nsImage)
             }
         } catch { }
         return nil
     }
+    #endif
     
 }

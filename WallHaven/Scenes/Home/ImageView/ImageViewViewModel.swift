@@ -13,9 +13,14 @@ class ImageViewViewModel: ObservableObject {
     @Published var backgroundColor: Color = .black
     @Published var showToast = false
     @Published var showAlert = false
-    
+    #if os(iOS)
     @Published var originalUIImage: UIImage?
     @Published var filteredUIImage: UIImage?
+    #endif
+    #if os(macOS)
+    @Published var originalNSImage: NSImage?
+    @Published var filteredNSImage: NSImage?
+    #endif
     @Published var showInfo = false
     @Published var imageSaved = false
     @Published var showBlurSlider = false
@@ -27,30 +32,24 @@ class ImageViewViewModel: ObservableObject {
     @Published var viewOpacity = 0.0
     @Published var previewType: PreviewType?
 
-    func saveImage() {
-        guard let imageToSave = filteredUIImage ?? originalUIImage else { return }
-        let imageSaver = ImageSaver()
-        imageSaver.writeToPhotoAlbum(image: imageToSave)
-        showToast = true
-    }
-
-    func loadImageFromURL(wallpaperURL: String) {
-        guard let url = URL(string: wallpaperURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data, let uiImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.originalImage = Image(uiImage: uiImage)
-                }
-            }
-        }.resume()
-    }
     
+    #if os(iOS)
     func setAverageColor() {
         guard let originalUIImage else { return }
         let uiColor = originalUIImage.averageColor ?? .clear
         backgroundColor = Color(uiColor)
     }
+    
+    func saveImage() {
+        guard let imageToSave = filteredUIImage ?? originalUIImage else { return }
+        let imageSaver = ImageSaver()
+        imageSaver.writeToPhotoAlbum(image: imageToSave)
+        withAnimation {
+            showToast = true
+            imageSaved.toggle()
+        }
+    }
+    
     
     @MainActor func applyBlueFilter(image: Image, radius: Float) {
         guard radius != 0.0 else {
@@ -88,12 +87,71 @@ class ImageViewViewModel: ObservableObject {
 
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
+    #endif
 
-    func saveImage(imageToSave: UIImage) {
-        let imageSaver = ImageSaver()
-        imageSaver.writeToPhotoAlbum(image: imageToSave)
+    #if os(macOS)
+    @MainActor func applyBlueFilter(image: Image, radius: Float) {
+        guard radius != 0.0 else {
+            filteredImage = nil
+            filteredNSImage = nil
+            return
+        }
+        if originalNSImage == nil {
+            originalNSImage = image.getNSImage()
+        }
+        let cgImage = originalNSImage!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let beginImage = CIImage(cgImage: cgImage)
+        
+        let context = CIContext()
+        let currentFilter = CIFilter.gaussianBlur()
+        
+        currentFilter.inputImage = beginImage
+        currentFilter.radius = radius
+        
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        
+        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
+
+        let size = NSSize(width: cgImage.width, height: cgImage.height)
+        let nsImage = NSImage(cgImage: cgImage, size: size)
+
+        filteredImage = Image(nsImage: nsImage)
+        filteredNSImage = filteredImage?.getNSImage()
     }
-
+    func setAverageColor() {
+        guard let originalNSImage else { return }
+        let nsColor = originalNSImage.averageColor ?? .clear
+        backgroundColor = Color(nsColor)
+    }
+    func openPrivacySettings() {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy") {
+                NSWorkspace.shared.open(url)
+            }
+    }
+    
+    #endif
+    
+    
+    func saveImage() {
+        guard let imageToSave = filteredNSImage ?? originalNSImage else { return }
+        let imageSaver = ImageSaver()
+        #if os(iOS)
+        imageSaver.writeToPhotoAlbum(image: imageToSave)
+        #endif
+        
+        #if os(macOS)
+        if let url = imageSaver.showSavePanel() {
+            imageSaver.saveImage(image: imageToSave, path: url)
+        }
+        #endif
+        
+        withAnimation {
+            showToast = true
+            imageSaved.toggle()
+        }
+    }
+    
     func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {

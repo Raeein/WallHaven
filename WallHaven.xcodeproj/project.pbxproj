@@ -59,7 +59,7 @@
 		27F7048F2B348E65003E43ED /* WallHaven_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7048E2B348E65003E43ED /* WallHaven_Widget.swift */; };
 		27F704912B348E65003E43ED /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704902B348E65003E43ED /* AppIntent.swift */; };
 		27F704932B348E66003E43ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F704922B348E66003E43ED /* Assets.xcassets */; };
-		27F704972B348E66003E43ED /* WallHaven WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		27F704972B348E66003E43ED /* WallHaven WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		27F7049D2B349085003E43ED /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7049C2B349085003E43ED /* Provider.swift */; };
 		27F7049F2B3490D9003E43ED /* SimpleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7049E2B3490D9003E43ED /* SimpleEntry.swift */; };
 		27F704A12B34911F003E43ED /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A02B34911F003E43ED /* WidgetView.swift */; };
@@ -619,6 +619,7 @@
 		};
 		27F704962B348E66003E43ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 27F704832B348E64003E43ED /* WallHaven WidgetExtension */;
 			targetProxy = 27F704952B348E66003E43ED /* PBXContainerItemProxy */;
 		};
@@ -885,6 +886,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.raeeinbagheri.WallHaven.WallHaven-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -914,6 +918,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.raeeinbagheri.WallHaven.WallHaven-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

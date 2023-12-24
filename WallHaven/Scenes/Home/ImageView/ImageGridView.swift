@@ -14,8 +14,6 @@ struct ImageGridView: View {
     @State private var wallpaperShownCount = 0
     @Binding var refreshWallpapers: Bool
     
-    private let apiService = APIService()
-    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 1) {

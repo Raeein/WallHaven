@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 struct PannableImageView: View {
@@ -62,3 +63,4 @@ struct PannableImageView: View {
 #Preview {
     PannableImageView()
 }
+#endif

@@ -50,16 +50,4 @@ struct WallHavenApp: App {
         }
         .modelContainer(sharedModelContainer)
     }
-
-    private func adjustVisualAppearance() {
-        var navigationBarLayoutMargins: UIEdgeInsets = .zero
-        navigationBarLayoutMargins.left = 26.0
-        navigationBarLayoutMargins.right = navigationBarLayoutMargins.left
-        UINavigationBar.appearance().layoutMargins = navigationBarLayoutMargins
-
-        var tableViewLayoutMargins: UIEdgeInsets = .zero
-        tableViewLayoutMargins.left = 28.0
-        tableViewLayoutMargins.right = tableViewLayoutMargins.left
-        UITableView.appearance().layoutMargins = tableViewLayoutMargins
-    }
 }

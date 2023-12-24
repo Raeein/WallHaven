@@ -15,7 +15,6 @@ struct APIKeyView: View {
 
     @State private var showInvalidAPIKeyAlert = false
 
-    let apiService = APIService()
     let keychainService = KeychainService()
 
     var body: some View {
@@ -26,7 +25,7 @@ struct APIKeyView: View {
                         TextField("Enter your key", text: $apiKeyFieldAlert)
                         Button("Verify", action: {
                             Task {
-                                let result = await apiService.verifyAPIKey(withKey: apiKeyFieldAlert)
+                                let result = await APIService.shared.verifyAPIKey(withKey: apiKeyFieldAlert)
                                 switch result {
                                 case .success:
                                     keychainService.saveAPIKey(apiKeyFieldAlert)

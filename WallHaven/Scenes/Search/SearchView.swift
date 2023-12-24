@@ -117,11 +117,12 @@ struct SearchView: View {
                 }
             }
             .task {
-                await popularSearches = APIService().getTags(tagType: .popular)
-                await viewedSearches = APIService().getTags(tagType: .viewed)
+                await popularSearches = APIService.shared.getTags(tagType: .popular)
+                await viewedSearches = APIService.shared.getTags(tagType: .viewed)
             }
             .toolbar(content: {
-                ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
+                #warning("before it was trailing")
+                ToolbarItemGroup(placement: ToolbarItemPlacement.automatic) {
                     Button(action: { showFilterSheet.toggle() }) {
                         Label("Filter", systemImage: "line.3.horizontal.decrease")
                             .foregroundStyle(.blue)

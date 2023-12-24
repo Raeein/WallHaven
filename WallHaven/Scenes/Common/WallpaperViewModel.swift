@@ -6,7 +6,6 @@ class WallpaperViewModel: ObservableObject {
     @Published var showRefreshing = false
 
     private var currentPage = 1
-    private let apiService = APIService()
     private var isLoading = false
     
     func loadWallpapers(config: WallpaperConfigs) {
@@ -15,7 +14,7 @@ class WallpaperViewModel: ObservableObject {
         isLoading = true
         
         Task {
-            let newWallpapers = await apiService.getWallpapers(configs: config)
+            let newWallpapers = await APIService.shared.getWallpapers(configs: config)
             DispatchQueue.main.async {
                 self.wallpapers.append(contentsOf: newWallpapers)
                 self.currentPage += 1

@@ -35,7 +35,13 @@ struct ImageView: View {
                     .ignoresSafeArea(.all)
                     .onAppear(perform: {
                         viewModel.setAverageColor()
+                        #if os(iOS)
                         viewModel.originalUIImage = originalImage.getUIImage()
+                        #endif
+                        #if os(macOS)
+                        viewModel.originalNSImage = originalImage.getNSImage()
+                        #endif
+                        
                     })
             } else {
                 ProgressView()
@@ -113,11 +119,7 @@ struct ImageView: View {
                         Button(action: {
                             viewModel.checkPhotoLibraryPermission { canSave in
                                 if canSave {
-                                    viewModel.saveImage(imageToSave: viewModel.filteredUIImage ?? viewModel.originalUIImage!)
-                                    viewModel.imageSaved.toggle()
-                                    withAnimation(.easeInOut) {
-                                        viewModel.showToast.toggle()
-                                    }
+                                    viewModel.saveImage()
                                 } else {
                                     viewModel.showAlert = true
                                 }
@@ -178,7 +180,7 @@ struct ImageView: View {
             }
         })
         .task {
-            viewModel.loadImageFromURL(wallpaperURL: wallpaper.path)
+            await viewModel.originalImage = APIService.shared.loadImageFromURL(wallpaperURL: wallpaper.path)
         }
         .onTapGesture {
             if viewModel.showInfo {

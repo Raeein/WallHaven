@@ -28,7 +28,7 @@ final class WallHavenTests: XCTestCase {
 
         measure(metrics: [XCTMemoryMetric()]) {
             Task {
-                await _ = APIService().getWallpapers()
+                await _ = APIService.shared.getWallpapers()
                 semaphore.signal()
             }
             semaphore.wait()
