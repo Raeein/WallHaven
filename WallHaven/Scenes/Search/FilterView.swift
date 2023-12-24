@@ -44,12 +44,27 @@ struct FilterView: View {
         NavigationStack {
 
             List {
+                
+                
                 Section {
-                    EnumCell(isChecked: $isNSFWSelected, text: Purity.nsfw.rawValue, onTap: updateNSFWFilter)
+                    EnumCell(isChecked: $isPeopleSelected, text: Category.people.rawValue, onTap: updatePeopleFilter)
                     
-                    EnumCell(isChecked: $isSFWSelected, text: Purity.sfw.rawValue, onTap: updateSFWFilter)
+                    EnumCell(isChecked: $isGeneralSelected, text: Category.general.rawValue, onTap: updateGeneralFilter)
                     
-                    EnumCell(isChecked: $isSketchySelected, text: Purity.sketchy.rawValue, onTap: updateSketchyFilter)
+                    EnumCell(isChecked: $isAnimeSelected, text: Category.anime.rawValue, onTap: updateAnimeFilter)
+                   
+      
+                } header: {
+                    Text("Categories")
+                }
+                
+
+                Section {
+                    EnumCell(isChecked: $isNSFWSelected, upperCased: true, text: Purity.nsfw.rawValue, onTap: updateNSFWFilter)
+                    
+                    EnumCell(isChecked: $isSFWSelected, upperCased: true, text: Purity.sfw.rawValue, onTap: updateSFWFilter)
+                    
+                    EnumCell(isChecked: $isSketchySelected, upperCased: true, text: Purity.sketchy.rawValue, onTap: updateSketchyFilter)
                    
       
                 } header: {
@@ -92,12 +107,18 @@ struct FilterView: View {
 struct EnumCell: View {
     @Binding var isChecked: Bool
     @State private var isTapped: Bool = false
+    var upperCased: Bool = false
     let text: String
     let onTap: () -> Void
     
     var body: some View {
         HStack {
-            Text(text.uppercased())
+            if upperCased {
+                Text(text.uppercased())
+            } else {
+                Text(text.capitalized)
+            }
+            
             Spacer()
             if isChecked {
                 Image(systemName: "checkmark")
@@ -122,25 +143,31 @@ struct EnumCell: View {
 extension FilterView {
     private func updateSFWFilter() {
         isSFWSelected.toggle()
+        configs.setSFWSelected(isSFWSelected)
     }
 
     private func updateNSFWFilter() {
         isNSFWSelected.toggle()
+        configs.setNSFWSelected(isNSFWSelected)
     }
 
     private func updateSketchyFilter() {
         isSketchySelected.toggle()
+        configs.setSketchySelected(isSketchySelected)
     }
 
     private func updatePeopleFilter() {
         isPeopleSelected.toggle()
+        configs.setPeopleSelected(isPeopleSelected)
     }
 
     private func updateGeneralFilter() {
         isGeneralSelected.toggle()
+        configs.setGeneralSelected(isGeneralSelected)
     }
 
     private func updateAnimeFilter() {
         isAnimeSelected.toggle()
+        configs.setAnimeSelected(isAnimeSelected)
     }
 }

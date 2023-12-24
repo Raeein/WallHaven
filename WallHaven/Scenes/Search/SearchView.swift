@@ -23,6 +23,14 @@ struct SearchView: View {
     @Query(sort: \SearchItem.timestamp) private var recentSearches: [SearchItem]
     
     private func addSearchItem(searchText: String) {
+        let predicate = #Predicate<SearchItem> { object in
+            object.searchText == searchText
+        }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        let res = try! modelContext.fetch(descriptor)
+        
+        guard res.count == 0 else { return }
+        
         withAnimation {
             let newItem = SearchItem(searchText: searchText, timestamp: Date())
             modelContext.insert(newItem)
@@ -86,22 +94,20 @@ struct SearchView: View {
             .sheet(isPresented: $showFilterSheet, content: {
                 FilterView(configs: configs)
                     .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.hidden)
-                    .onDisappear(perform: {
-                        if (configs.query != nil) && configs.query != "" {
-                            showWallpapers = true
-                        }
-                    })
+                    .presentationDragIndicator(.visible)
             })
-        }
-        .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
-        .onSubmit(of: .search) {
-            addSearchItem(searchText: searchText)
-            withAnimation {
-                configs.query = searchText
-                showWallpapers = true
+            .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
+            .onSubmit(of: .search) {
+                addSearchItem(searchText: searchText)
+                print(configs.getConfigsDescription())
+                print(configs.categories)
+                print(configs.purities)
+                withAnimation {
+                    configs.query = searchText
+                    showWallpapers = true
+                }
+                print("Searching for \(searchText)")
             }
-            print("Searching for \(searchText)")
         }
     }
 }
