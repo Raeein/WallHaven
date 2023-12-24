@@ -14,7 +14,7 @@ enum Purity: String, CaseIterable, Hashable, Identifiable {
     var id : String { UUID().uuidString }
     case sfw
     case sketchy
-    case nsfw    
+    case nsfw
 }
 
 enum Category: String, CaseIterable, Hashable, Identifiable {
@@ -24,7 +24,8 @@ enum Category: String, CaseIterable, Hashable, Identifiable {
     case people
 }
 
-enum Sorting: String {
+enum Sorting: String, CaseIterable, Hashable, Identifiable  {
+    var id: String { UUID().uuidString }
     case dateAdded = "date_added"
     case relevance
     case random
@@ -33,12 +34,14 @@ enum Sorting: String {
     case toplist
 }
 
-enum Order: String {
+enum Order: String, CaseIterable, Hashable, Identifiable {
+    var id: String { UUID().uuidString }
     case desc
     case asc
 }
 
-enum TopRange: String {
+enum TopRange: String ,CaseIterable, Hashable, Identifiable {
+    var id: String { UUID().uuidString }
     case oneDay = "1d"
     case threeDays = "3d"
     case oneWeek = "1w"
@@ -61,7 +64,7 @@ class WallpaperConfigs: ObservableObject {
     let isSearchView: Bool = false
     
     func addCategory(of newCategory: Category) {
-
+        
         if !categories.contains(newCategory) {
             categories.append(newCategory)
         }
@@ -90,21 +93,21 @@ class WallpaperConfigs: ObservableObject {
     }
     
     func getConfigsDescription() -> String {
-       
+        
         var description = "Configurations:\n"
-
+        
         let purityString = getPurityString()
         description += "Purities: \(purityString)\n"
-
+        
         let categoryString = getCategoryString()
         description += "Categories: \(categoryString)\n"
-
+        
         description += "Sorting: \(sorting.rawValue), Order: \(order.rawValue)\n"
-
+        
         if let query = query, !query.isEmpty {
             description += "Query: \(query)\n"
         }
-
+        
         if let page = page {
             description += "Page: \(page)\n"
         }
@@ -112,7 +115,7 @@ class WallpaperConfigs: ObservableObject {
     }
     
     func addPurity(of newPurity: Purity) {
-
+        
         if !purities.contains(newPurity) {
             purities.append(newPurity)
         }
@@ -143,35 +146,35 @@ class WallpaperConfigs: ObservableObject {
     }
     
     func setSFWSelected(_ isSelected: Bool) {
-         updatePurity(.sfw, isSelected: isSelected)
-     }
-
-     func setNSFWSelected(_ isSelected: Bool) {
-         updatePurity(.nsfw, isSelected: isSelected)
-     }
-
-     func setSketchySelected(_ isSelected: Bool) {
-         updatePurity(.sketchy, isSelected: isSelected)
-     }
-
-     func setPeopleSelected(_ isSelected: Bool) {
-         updateCategory(.people, isSelected: isSelected)
-     }
-
-     func setGeneralSelected(_ isSelected: Bool) {
-         updateCategory(.general, isSelected: isSelected)
-     }
-
-     func setAnimeSelected(_ isSelected: Bool) {
-         updateCategory(.anime, isSelected: isSelected)
-     }
+        updatePurity(.sfw, isSelected: isSelected)
+    }
+    
+    func setNSFWSelected(_ isSelected: Bool) {
+        updatePurity(.nsfw, isSelected: isSelected)
+    }
+    
+    func setSketchySelected(_ isSelected: Bool) {
+        updatePurity(.sketchy, isSelected: isSelected)
+    }
+    
+    func setPeopleSelected(_ isSelected: Bool) {
+        updateCategory(.people, isSelected: isSelected)
+    }
+    
+    func setGeneralSelected(_ isSelected: Bool) {
+        updateCategory(.general, isSelected: isSelected)
+    }
+    
+    func setAnimeSelected(_ isSelected: Bool) {
+        updateCategory(.anime, isSelected: isSelected)
+    }
     
     private func updatePurity(_ purity: Purity, isSelected: Bool) {
         if isSelected {
             if purities.contains(purity) == false {
                 purities.append(purity)
             }
-        } 
+        }
         else {
             if purities.contains(purity) == false {
                 purities.removeAll(where: { p in
@@ -195,6 +198,14 @@ class WallpaperConfigs: ObservableObject {
             
         }
     }
+    
+    func resetFilters() {
+        purities.removeAll()
+        categories.removeAll()
+        sorting = .random
+        order = .desc
+        topRange = .oneYear
+    }
 }
 
 
@@ -214,7 +225,7 @@ struct APIService {
         }
         return wallpapers
     }
-
+    
     func getSearchedWallpapers(searchTerm: String) async -> [Wallpaper] {
         var wallpapers = [Wallpaper]()
         do {
@@ -225,15 +236,15 @@ struct APIService {
         } catch {
             print(error)
         }
-
+        
         return wallpapers
     }
-
+    
     func verifyAPIKey(withKey apiKey: String) async -> Result<Void, Error> {
         do {
             let url = URL(string: Constants.WallHavenURL.search())!.appending("apikey", value: apiKey)
             let (_, response) = try await URLSession.shared.data(from: url)
-
+            
             if let httpResponse = response as? HTTPURLResponse {
                 print("HTTP Status Code is: \(httpResponse.statusCode)")
                 let statusCode = httpResponse.statusCode
@@ -246,13 +257,13 @@ struct APIService {
         }
         return .success(())
     }
-
+    
     private func generateSeed() -> String {
         var seed = ""
-
+        
         let seedLength = 6
         let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
+        
         for _ in 0 ..< seedLength {
             seed.append(characters.randomElement()!)
         }
@@ -260,7 +271,7 @@ struct APIService {
     }
     
     private func generateURL(configs: WallpaperConfigs, apiKey: String? = nil) -> URL {
-
+        
         var url = URL(string: Constants.WallHavenURL.search())!
             .appending("seed", value: generateSeed())
             .appending("sorting", value: configs.sorting.rawValue)
@@ -279,10 +290,10 @@ struct APIService {
         return url
     }
     
-
+    
     func loadImageFromURL(wallpaperURL: String) async -> Image? {
         guard let url = URL(string: wallpaperURL) else { return nil }
-
+        
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             if let uiImage = UIImage(data: data) {

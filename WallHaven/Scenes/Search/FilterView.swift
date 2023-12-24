@@ -44,8 +44,6 @@ struct FilterView: View {
         NavigationStack {
 
             List {
-                
-                
                 Section {
                     EnumCell(isChecked: $isPeopleSelected, text: Category.people.rawValue, onTap: updatePeopleFilter)
                     
@@ -57,6 +55,7 @@ struct FilterView: View {
                 } header: {
                     Text("Categories")
                 }
+
                 
 
                 Section {
@@ -71,22 +70,38 @@ struct FilterView: View {
                     Label("Purity", systemImage: "18.circle.fill")
                         .foregroundColor(.red)
                 }
-       
-                VStack(alignment: .leading) {
-                    Button("Clear All") {
-                        print("Clearing all")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .bold()
-                    
-                    
-                    Button(action: {}, label: {
-                        HStack {
-                            Text("Advanced Search")
-                            Image(systemName: "chevron.down")
-                            
+                
+                
+                Section {
+                    Picker("Sort By", selection: $configs.sorting) {
+                        ForEach(Sorting.allCases, id: \.self) { sort in
+                            Text(sort.rawValue).tag(sort)
                         }
-                    })
+                    }
+                    Picker("Order By", selection: $configs.order) {
+                        ForEach(Order.allCases, id: \.self) { order in
+                            Text(order.rawValue).tag(order)
+                        }
+                    }
+                } footer: {
+                    Text("Choose the top range of which the wallpapers would be sorted in by")
+                }
+                
+                
+                Section {
+                    Picker("Top Range", selection: $configs.topRange) {
+                        ForEach(TopRange.allCases, id: \.self) { range in
+                            Text(range.rawValue).tag(range)
+                        }
+                    }
+                } footer: {
+                    Text("Choose the sort by and ordering")
+                }
+                   
+                VStack(alignment: .center) {
+                    Button("Reset All") {
+                        configs.resetFilters()
+                    }
                     .buttonStyle(.borderedProminent)
                     .bold()
                 }
@@ -94,8 +109,8 @@ struct FilterView: View {
             .onAppear(perform: {
                 configureFilterValues()
             })
-//            .navigationTitle("Filters")
-//            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Filters")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
