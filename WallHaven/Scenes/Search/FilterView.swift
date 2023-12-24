@@ -81,7 +81,9 @@ struct FilterView: View {
             }
             .onAppear(perform: { viewModel.configureFilterValues() })
             .navigationTitle("Filters")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
         }
     }
 }

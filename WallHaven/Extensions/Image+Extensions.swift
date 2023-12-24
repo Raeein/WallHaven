@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 extension Image {
@@ -6,3 +7,4 @@ extension Image {
         return ImageRenderer(content: self).uiImage
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 extension UIImage {
@@ -11,3 +12,4 @@ extension UIImage {
     }
   }
 }
+#endif

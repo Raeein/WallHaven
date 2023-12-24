@@ -5,8 +5,14 @@ struct ImageGridViewCell: View {
     let wallpaper: Wallpaper
     let imageQuality: String
     
+    #if os(iOS)
     private let cellWidth = UIScreen.main.bounds.width
     private let cellHeight = UIScreen.main.bounds.height
+    #endif
+    #if os(macOS)
+    private let cellWidth = NSScreen.main?.visibleFrame.size.width ?? 200
+    private let cellHeight = NSScreen.main?.visibleFrame.size.height ?? 200
+    #endif
     
     var body: some View {
         NavigationLink {

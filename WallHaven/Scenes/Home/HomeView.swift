@@ -15,8 +15,15 @@ struct HomeView: View {
         NavigationStack {
             ImageGridView(configs: configs, refreshWallpapers: $refreshWallpapers)
                 .toolbar(content: {
-                    ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
-                        
+//                    #if os(iOS)
+//                    ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
+                    #warning("Check if this correct")
+                    ToolbarItemGroup(placement: ToolbarItemPlacement.automatic) {
+//                    #endif
+//                    #if os(macOS)
+//                    ToolbarItemGroup(placement: ToolbarItemPlacement.confirmationAction) {
+//                    #endif
+                                            
                         Button(action: {
                             refreshWallpapers = true
                             FilterTip.hasViewedRefreshTip = true

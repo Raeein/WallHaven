@@ -27,6 +27,7 @@
 		27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */; };
 		27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */; };
 		279091612B3887690060AF75 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 279091602B3887690060AF75 /* SwiftSoup */; };
+		279091652B38B26E0060AF75 /* ImageViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279091642B38B26E0060AF75 /* ImageViewViewModel.swift */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -119,6 +120,8 @@
 		275E93602B2E033D00CEF178 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperViewModel.swift; sourceTree = "<group>"; };
 		27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridViewCell.swift; sourceTree = "<group>"; };
+		279091632B38AE5F0060AF75 /* WallHaven.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WallHaven.entitlements; sourceTree = "<group>"; };
+		279091642B38B26E0060AF75 /* ImageViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewViewModel.swift; sourceTree = "<group>"; };
 		279D4B652B2649560082ACD1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		279D4B672B2770780082ACD1 /* PannableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableImageView.swift; sourceTree = "<group>"; };
 		279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenWallpaperPreview.swift; sourceTree = "<group>"; };
@@ -257,6 +260,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		279091662B38B27B0060AF75 /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
+				279091642B38B26E0060AF75 /* ImageViewViewModel.swift */,
+				27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */,
+				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
+			);
+			path = ImageView;
+			sourceTree = "<group>";
+		};
 		279D4B692B27731A0082ACD1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,10 +284,8 @@
 		279D4B6C2B278EE80082ACD1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				279091662B38B27B0060AF75 /* ImageView */,
 				27D190B12B12CDE60002F08C /* HomeView.swift */,
-				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
-				27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */,
-				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
 				275E935E2B2DFFC100CEF178 /* Tips.swift */,
 				27F704AC2B361667003E43ED /* PreviewViews.swift */,
 			);
@@ -304,6 +316,7 @@
 		27D190992B12C9F80002F08C /* WallHaven */ = {
 			isa = PBXGroup;
 			children = (
+				279091632B38AE5F0060AF75 /* WallHaven.entitlements */,
 				27D1909A2B12C9F80002F08C /* WallHavenApp.swift */,
 				27D190AA2B12CBF50002F08C /* RootView.swift */,
 				27DF44032B1F787200361BBC /* Constants.swift */,
@@ -561,6 +574,7 @@
 				27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */,
 				27F704AD2B361667003E43ED /* PreviewViews.swift in Sources */,
 				27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */,
+				279091652B38B26E0060AF75 /* ImageViewViewModel.swift in Sources */,
 				270C686F2B36683300EF4DA2 /* NotificationService.swift in Sources */,
 				279D4B702B2799140082ACD1 /* ImageSaver.swift in Sources */,
 			);
@@ -736,27 +750,33 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WallHaven/WallHaven.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WallHaven/Preview Content\"";
 				DEVELOPMENT_TEAM = HG79K3YA5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.raeeinbagheri.WallHaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -769,27 +789,33 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WallHaven/WallHaven.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WallHaven/Preview Content\"";
 				DEVELOPMENT_TEAM = HG79K3YA5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Save an API key for WallHaven";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Save wallpapers to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.raeeinbagheri.WallHaven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
