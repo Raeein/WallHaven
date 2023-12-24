@@ -3,9 +3,11 @@ import SwiftData
 
 struct SearchView: View {
     @State private var searchText = ""
-    @State private var isPopularSearchesExpanded = true
+    @State private var isPopularSearchesExpanded = false
     @State private var isRecentSearchesExpanded = true
-    @State private var isSearchBarPresented = true
+    @State private var isViewedSearchesExpanded = false
+    
+    @State private var isSearchBarPresented = false
     @State private var showWallpapers = false
     @State private var showFilterSheet = false
     @State var refreshWallpapers = false
@@ -14,12 +16,8 @@ struct SearchView: View {
     
     @Environment(\.modelContext) private var modelContext
     
-    // TODO: Replace with something idk - TBD
-    private var popularSearches = [
-        "First",
-        "Second",
-        "Third"
-    ]
+    @State private var popularSearches = [Tag]()
+    @State private var viewedSearches = [Tag]()
 
     @Query(sort: \SearchItem.timestamp) private var recentSearches: [SearchItem]
     
@@ -54,26 +52,73 @@ struct SearchView: View {
                 } else {
                     VStack(alignment: .leading) {
                         List {
-                            Section("Popular searches", isExpanded: $isPopularSearchesExpanded) {
-                                ForEach(popularSearches, id: \.self) { item in
-                                    NavigationLink(destination: Text("Detail View for \(item)")) {
-                                        Text(item)
-                                    }
-                                }
-                            }
-                            
                             Section("Recent searches", isExpanded: $isRecentSearchesExpanded) {
-                                ForEach(recentSearches, id: \.self) { item in
-                                    NavigationLink(destination: Text("Detail View for \(item.searchText)")) {
+                                ForEach(recentSearches, id: \.id) { item in
+                                    HStack {
                                         Text(item.searchText)
+                                        Spacer()
+                                        Image(systemName: "chevron.forward.circle")
+                                    }
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        withAnimation {
+                                            searchText = item.searchText
+                                            configs.query = item.searchText
+                                            showWallpapers = true
+                                        }
+                                        
                                     }
                                 }
                                 .onDelete(perform: deleteSearchItems)
+                            }
+                            
+                            Section("Popular searches", isExpanded: $isPopularSearchesExpanded) {
+                                ForEach(popularSearches, id: \.id) { item in
+                                    HStack {
+                                        Text(item.tagName)
+                                        Spacer()
+                                        Image(systemName: "chevron.forward.circle")
+                                    }
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        withAnimation {
+                                            searchText = item.tagName
+                                            configs.query = item.tagName
+                                            showWallpapers = true
+                                        }
+                                        
+                                    }
+                    
+                                }
+                            }
+                            
+                            Section("Most Viewed searches", isExpanded: $isViewedSearchesExpanded) {
+                                ForEach(viewedSearches, id: \.id) { item in
+                                    HStack {
+                                        Text(item.tagName)
+                                        Spacer()
+                                        Image(systemName: "chevron.forward.circle")
+                                    }
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        withAnimation {
+                                            searchText = item.tagName
+                                            configs.query = item.tagName
+                                            showWallpapers = true
+                                        }
+                                        
+                                    }
+                    
+                                }
                             }
                         }
                         .listStyle(.sidebar)
                     }
                 }
+            }
+            .task {
+                await popularSearches = APIService().getTags(tagType: .popular)
+                await viewedSearches = APIService().getTags(tagType: .viewed)
             }
             .toolbar(content: {
                 ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
@@ -84,9 +129,8 @@ struct SearchView: View {
                     .buttonStyle(.plain)
                 }
             })
-//            .navigationTitle("Search")
             .onChange(of: searchText) {
-                if searchText.isEmpty || showWallpapers {
+                if searchText.isEmpty && showWallpapers {
                     withAnimation {
                         showWallpapers = false
                     }

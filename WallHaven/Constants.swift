@@ -20,5 +20,11 @@ struct Constants {
         static let search = {
             return home + "/api/v1/search"
         }
+        static let viewedTags = {
+            return home + "/tags/viewed"
+        }
+        static let popularTags = {
+            return home + "/tags/popular"
+        }
     }
 }

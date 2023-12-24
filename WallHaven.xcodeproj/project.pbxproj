@@ -15,6 +15,10 @@
 		2707200F2B2B9183004FDA06 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707200E2B2B9183004FDA06 /* WebView.swift */; };
 		270C686F2B36683300EF4DA2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C686E2B36683300EF4DA2 /* NotificationService.swift */; };
 		270C68712B38741400EF4DA2 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C68702B38741400EF4DA2 /* FilterViewModel.swift */; };
+		270C68742B38821700EF4DA2 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 270C68732B38821700EF4DA2 /* SwiftSoup */; };
+		270C68762B38859B00EF4DA2 /* WallpaperConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C68752B38859B00EF4DA2 /* WallpaperConfigs.swift */; };
+		270C68772B3885D300EF4DA2 /* WallpaperConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C68752B38859B00EF4DA2 /* WallpaperConfigs.swift */; };
+		270C68782B3885E300EF4DA2 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B32B12D3A90002F08C /* Wallpaper.swift */; };
 		2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
 		274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274AFE092B2F40E900FFFC16 /* ImageGridView.swift */; };
 		275E935B2B2DFE6900CEF178 /* wallpaper.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E935A2B2DFE6900CEF178 /* wallpaper.json */; };
@@ -22,6 +26,7 @@
 		275E93612B2E033D00CEF178 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E93602B2E033D00CEF178 /* loading.json */; };
 		27755BA72B2F7554004A7977 /* WallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */; };
 		27813DE22B30CA2500D56FF5 /* ImageGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */; };
+		279091612B3887690060AF75 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 279091602B3887690060AF75 /* SwiftSoup */; };
 		279D4B662B2649560082ACD1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B652B2649560082ACD1 /* TestView.swift */; };
 		279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B672B2770780082ACD1 /* PannableImageView.swift */; };
 		279D4B6B2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4B6A2B2773980082ACD1 /* HomeScreenWallpaperPreview.swift */; };
@@ -58,7 +63,6 @@
 		27F7049F2B3490D9003E43ED /* SimpleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7049E2B3490D9003E43ED /* SimpleEntry.swift */; };
 		27F704A12B34911F003E43ED /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A02B34911F003E43ED /* WidgetView.swift */; };
 		27F704A22B349C96003E43ED /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E1F5D02B2935E50067E96A /* APIService.swift */; };
-		27F704A32B349CB4003E43ED /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D190B32B12D3A90002F08C /* Wallpaper.swift */; };
 		27F704A42B349CC1003E43ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF44032B1F787200361BBC /* Constants.swift */; };
 		27F704A52B349CD5003E43ED /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
 		27F704A72B34A031003E43ED /* LocalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F704A62B34A031003E43ED /* LocalImage.swift */; };
@@ -107,6 +111,7 @@
 		2707200E2B2B9183004FDA06 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		270C686E2B36683300EF4DA2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		270C68702B38741400EF4DA2 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		270C68752B38859B00EF4DA2 /* WallpaperConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperConfigs.swift; sourceTree = "<group>"; };
 		2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		274AFE092B2F40E900FFFC16 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		275E935A2B2DFE6900CEF178 /* wallpaper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallpaper.json; sourceTree = "<group>"; };
@@ -162,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27DF44092B200E3000361BBC /* KeychainAccess in Frameworks */,
+				270C68742B38821700EF4DA2 /* SwiftSoup in Frameworks */,
 				27DF44022B1F783700361BBC /* Security.framework in Frameworks */,
 				27071FFF2B2B7E71004FDA06 /* Lottie in Frameworks */,
 			);
@@ -180,6 +186,7 @@
 			files = (
 				27F704882B348E64003E43ED /* SwiftUI.framework in Frameworks */,
 				27F704862B348E64003E43ED /* WidgetKit.framework in Frameworks */,
+				279091612B3887690060AF75 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				27755BA62B2F7554004A7977 /* WallpaperViewModel.swift */,
+				27D190B32B12D3A90002F08C /* Wallpaper.swift */,
+				270C68752B38859B00EF4DA2 /* WallpaperConfigs.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -340,7 +349,6 @@
 		27E1F5CD2B29356E0067E96A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				27D190B32B12D3A90002F08C /* Wallpaper.swift */,
 				279D4B6F2B2799140082ACD1 /* ImageSaver.swift */,
 				27E1F5CE2B2935D30067E96A /* KeychainService.swift */,
 				27E1F5D02B2935E50067E96A /* APIService.swift */,
@@ -395,6 +403,7 @@
 			packageProductDependencies = (
 				27DF44082B200E3000361BBC /* KeychainAccess */,
 				27071FFE2B2B7E71004FDA06 /* Lottie */,
+				270C68732B38821700EF4DA2 /* SwiftSoup */,
 			);
 			productName = WallHaven;
 			productReference = 27D190972B12C9F80002F08C /* WallHaven.app */;
@@ -431,6 +440,9 @@
 			dependencies = (
 			);
 			name = "WallHaven WidgetExtension";
+			packageProductDependencies = (
+				279091602B3887690060AF75 /* SwiftSoup */,
+			);
 			productName = "WallHaven WidgetExtension";
 			productReference = 27F704842B348E64003E43ED /* WallHaven WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -469,6 +481,7 @@
 			packageReferences = (
 				27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				27071FFD2B2B7E71004FDA06 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				270C68722B38821700EF4DA2 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 27D190982B12C9F80002F08C /* Products */;
 			projectDirPath = "";
@@ -531,6 +544,7 @@
 				27DF44042B1F787200361BBC /* Constants.swift in Sources */,
 				27DF43FF2B1F744100361BBC /* SettingsView.swift in Sources */,
 				27DF44062B1F7A2400361BBC /* APIKeyView.swift in Sources */,
+				270C68762B38859B00EF4DA2 /* WallpaperConfigs.swift in Sources */,
 				279D4B682B2770780082ACD1 /* PannableImageView.swift in Sources */,
 				27D190AB2B12CBF50002F08C /* RootView.swift in Sources */,
 				2707200F2B2B9183004FDA06 /* WebView.swift in Sources */,
@@ -567,10 +581,11 @@
 				27F704A52B349CD5003E43ED /* URL+Extensions.swift in Sources */,
 				27F704A82B34A1C2003E43ED /* LocalImage.swift in Sources */,
 				27F7049F2B3490D9003E43ED /* SimpleEntry.swift in Sources */,
-				27F704A32B349CB4003E43ED /* Wallpaper.swift in Sources */,
 				27F7048B2B348E65003E43ED /* WallHaven_WidgetBundle.swift in Sources */,
 				27F704A12B34911F003E43ED /* WidgetView.swift in Sources */,
 				27F704912B348E65003E43ED /* AppIntent.swift in Sources */,
+				270C68782B3885E300EF4DA2 /* Wallpaper.swift in Sources */,
+				270C68772B3885D300EF4DA2 /* WallpaperConfigs.swift in Sources */,
 				27F704A42B349CC1003E43ED /* Constants.swift in Sources */,
 				27F704AB2B35EA36003E43ED /* UIImage+Extenstions.swift in Sources */,
 				27F7048D2B348E65003E43ED /* WallHaven_WidgetLiveActivity.swift in Sources */,
@@ -929,6 +944,14 @@
 				minimumVersion = 4.3.4;
 			};
 		};
+		270C68722B38821700EF4DA2 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
 		27DF44072B200E3000361BBC /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -944,6 +967,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 27071FFD2B2B7E71004FDA06 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		270C68732B38821700EF4DA2 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 270C68722B38821700EF4DA2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		279091602B3887690060AF75 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 270C68722B38821700EF4DA2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		27DF44082B200E3000361BBC /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
