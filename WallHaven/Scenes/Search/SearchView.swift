@@ -141,6 +141,11 @@ struct SearchView: View {
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
             })
+            .onChange(of: showFilterSheet) {
+                if showFilterSheet == false {
+                    refreshWallpapers = true
+                } 
+            }
             .searchable(text: $searchText, isPresented: $isSearchBarPresented, prompt: "Enter a search term")
             .onSubmit(of: .search) {
                 addSearchItem(searchText: searchText)
