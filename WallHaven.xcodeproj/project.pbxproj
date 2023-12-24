@@ -14,6 +14,7 @@
 		2707200D2B2B8D02004FDA06 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 2707200B2B2B8D01004FDA06 /* key.json */; };
 		2707200F2B2B9183004FDA06 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707200E2B2B9183004FDA06 /* WebView.swift */; };
 		270C686F2B36683300EF4DA2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C686E2B36683300EF4DA2 /* NotificationService.swift */; };
+		270C68712B38741400EF4DA2 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C68702B38741400EF4DA2 /* FilterViewModel.swift */; };
 		2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */; };
 		274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274AFE092B2F40E900FFFC16 /* ImageGridView.swift */; };
 		275E935B2B2DFE6900CEF178 /* wallpaper.json in Resources */ = {isa = PBXBuildFile; fileRef = 275E935A2B2DFE6900CEF178 /* wallpaper.json */; };
@@ -105,6 +106,7 @@
 		2707200B2B2B8D01004FDA06 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
 		2707200E2B2B9183004FDA06 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		270C686E2B36683300EF4DA2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		270C68702B38741400EF4DA2 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		2711F8F42B2CB74C003E9B6F /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		274AFE092B2F40E900FFFC16 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		275E935A2B2DFE6900CEF178 /* wallpaper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallpaper.json; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				27D1909E2B12C9F80002F08C /* SearchItem.swift */,
 				27D190AE2B12CD8E0002F08C /* SearchView.swift */,
 				27C66DA32B31E52B00073E63 /* FilterView.swift */,
+				270C68702B38741400EF4DA2 /* FilterViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -259,10 +262,10 @@
 			isa = PBXGroup;
 			children = (
 				27D190B12B12CDE60002F08C /* HomeView.swift */,
-				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
-				275E935E2B2DFFC100CEF178 /* Tips.swift */,
 				274AFE092B2F40E900FFFC16 /* ImageGridView.swift */,
 				27813DE12B30CA2500D56FF5 /* ImageGridViewCell.swift */,
+				279D4B6D2B278EF90082ACD1 /* ImageView.swift */,
+				275E935E2B2DFFC100CEF178 /* Tips.swift */,
 				27F704AC2B361667003E43ED /* PreviewViews.swift */,
 			);
 			path = Home;
@@ -538,6 +541,7 @@
 				27F704AA2B35E9F5003E43ED /* UIImage+Extenstions.swift in Sources */,
 				27C66DA82B33694200073E63 /* Image+Extensions.swift in Sources */,
 				274AFE0A2B2F40E900FFFC16 /* ImageGridView.swift in Sources */,
+				270C68712B38741400EF4DA2 /* FilterViewModel.swift in Sources */,
 				2711F8F52B2CB74C003E9B6F /* URL+Extensions.swift in Sources */,
 				27D190AF2B12CD8E0002F08C /* SearchView.swift in Sources */,
 				27C66DA62B3349E600073E63 /* UIImage+Extensions.swift in Sources */,

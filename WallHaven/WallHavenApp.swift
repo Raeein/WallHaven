@@ -32,12 +32,21 @@ struct WallHavenApp: App {
             RootView()
                 .animation(.smooth, value: isDarkModeEnabled)
                 .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
-                .task {
-                    try? Tips.configure([
-                        .displayFrequency(.weekly),
-                        .datastoreLocation(.applicationDefault)
-                    ])
-                }
+                    .task {
+                        try? Tips.resetDatastore()
+                        try? Tips.configure([
+                            .displayFrequency(.immediate),
+                            .datastoreLocation(.applicationDefault)
+                        ])
+                    }
+            
+//            
+//                .task {
+//                    try? Tips.configure([
+//                        .displayFrequency(.weekly),
+//                        .datastoreLocation(.applicationDefault)
+//                    ])
+//                }
         }
         .modelContainer(sharedModelContainer)
     }

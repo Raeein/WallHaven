@@ -5,7 +5,6 @@ struct RootView: View {
     @State var selectedTab = 0
     @State private var wallpaperLoading = true
     @State private var animateGradient = true
-    @State private var wallpapers = [Wallpaper]()
 
     var body: some View {
 
@@ -41,7 +40,7 @@ struct RootView: View {
             } else {
                 TabView(selection: $selectedTab,
                         content: {
-                    HomeView(wallpapers: $wallpapers)
+                    HomeView()
                         .tabItem { Label("Home", systemImage: "house.fill") }
                         .tag(1)
 
@@ -57,9 +56,6 @@ struct RootView: View {
                     NotificationService().checkAndScheduleNotification()
                 })
             }
-        }
-        .task {
-            wallpapers = await APIService().getWallpapers()
         }
     }
 }

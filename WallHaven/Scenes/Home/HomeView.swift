@@ -3,19 +3,44 @@ import TipKit
 
 struct HomeView: View {
 
-    @Binding var wallpapers: [Wallpaper]
     @StateObject var configs = WallpaperConfigs()
+    
+    private let filterTip = FilterTip()
+    private let refreshTip = RefreshTip()
+    
+    @State private var refreshWallpapers = false
     
     var body: some View {
 
         NavigationStack {
-            ImageGridView(configs: configs)
+            ImageGridView(configs: configs, refreshWallpapers: $refreshWallpapers)
+                .toolbar(content: {
+                    ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
+                        Button(action: {}) {
+                            Label("Filter", systemImage: "line.3.horizontal.decrease")
+                                .foregroundStyle(.blue)
+                        }
+                        .buttonStyle(.plain)
+                        .popoverTip(filterTip)
+                        
+                        Button(action: {
+                            refreshWallpapers = true
+                            FilterTip.hasViewedRefreshTip = true
+                        }) {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                                .foregroundStyle(.blue)
+                        }
+                        .buttonStyle(.plain)
+                        .popoverTip(refreshTip)
+                    }
+                })
+                .navigationTitle("Home")
         }
     }
 }
 //
 //#Preview {
-//    HomeView(wallpapers: [])
+//    HomeView(wallpapers: LocalImage.getSampleImages())
 //        .task {
 //            try? Tips.resetDatastore()
 //            try? Tips.configure([

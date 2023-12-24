@@ -1,20 +1,20 @@
 import SwiftUI
 
+
 struct ImageGridView: View {
     @State private var columns = [
         GridItem(.flexible(), spacing: 1),
         GridItem(.flexible(), spacing: 1),
         GridItem(.flexible(), spacing: 1)
     ]
-
+    
     @AppStorage("imageQuality") private var imageQuality: ImageQuality = .low
     @StateObject var viewModel = WallpaperViewModel()
     @ObservedObject var configs: WallpaperConfigs
     @State private var wallpaperShownCount = 0
-
+    @Binding var refreshWallpapers: Bool
+    
     private let apiService = APIService()
-    private let filterTip = FilterTip()
-    private let refreshTip = RefreshTip()
     
     var body: some View {
         ScrollView {
@@ -41,35 +41,20 @@ struct ImageGridView: View {
                 ProgressView()
             }
         }
-        .onChange(of: wallpaperShownCount, {
+        .onChange(of: wallpaperShownCount) {
             if wallpaperShownCount == viewModel.wallpapers.count {
                 viewModel.showRefreshing = true
                 viewModel.loadWallpapers(config: configs)
             }
-        })
+        }
+        .onChange(of: refreshWallpapers) {
+            viewModel.wallpapers.removeAll()
+            viewModel.loadWallpapers(config: configs)
+            refreshWallpapers = false
+        }
         .onAppear(perform: {
             viewModel.loadWallpapers(config: configs)
             print("image quality is\(imageQuality)")
-        })
-        .navigationTitle("Home")
-        .toolbar(content: {
-            ToolbarItemGroup(placement: ToolbarItemPlacement.topBarTrailing) {
-                Button(action: {}) {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease")
-                        .foregroundStyle(.blue)
-                }
-                .buttonStyle(.plain)
-                .popoverTip(filterTip)
-
-                Button(action: {
-                    FilterTip.hasViewedRefreshTip = true
-                }) {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                        .foregroundStyle(.blue)
-                }
-                .buttonStyle(.plain)
-                .popoverTip(refreshTip)
-            }
         })
     }
 }

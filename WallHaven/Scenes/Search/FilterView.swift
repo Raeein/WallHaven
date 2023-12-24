@@ -6,38 +6,12 @@ struct FilterData: Identifiable {
     var isSelected: Bool = false
 }
 
-
 struct FilterView: View {
     
-    @ObservedObject var configs: WallpaperConfigs
-    
-    // Purities
-    @State var isSFWSelected: Bool = false
-    @State var isNSFWSelected: Bool = false
-    @State var isSketchySelected: Bool = false
-    
-    // Categories
-    @State var isPeopleSelected: Bool = false
-    @State var isGeneralSelected: Bool = false
-    @State var isAnimeSelected: Bool = false
-    
-    @State var query: String? = nil
-    @State var sorting: Sorting = .random
-    @State var order: Order = .desc
-    
-    
-    private func configureFilterValues() {
-        isSFWSelected = configs.isSFWSelected()
-        isNSFWSelected = configs.isNSFWSelected()
-        isSketchySelected = configs.isSketchySelected()
-        
-        isPeopleSelected = configs.isPeopleSelected()
-        isGeneralSelected = configs.isGeneralSelected()
-        isAnimeSelected = configs.isAnimeSelected()
-        
-        query = configs.query
-        sorting = configs.sorting
-        order = configs.order
+    @ObservedObject var viewModel: FilterViewModel
+
+    init(configs: WallpaperConfigs) {
+        viewModel = FilterViewModel(configs: configs)
     }
     
     var body: some View {
@@ -45,25 +19,24 @@ struct FilterView: View {
 
             List {
                 Section {
-                    EnumCell(isChecked: $isPeopleSelected, text: Category.people.rawValue, onTap: updatePeopleFilter)
+                    EnumCell(isChecked: $viewModel.isPeopleSelected, text: Category.people.rawValue, onTap: viewModel.updatePeopleFilter)
                     
-                    EnumCell(isChecked: $isGeneralSelected, text: Category.general.rawValue, onTap: updateGeneralFilter)
+                    EnumCell(isChecked: $viewModel.isGeneralSelected, text: Category.general.rawValue, onTap: viewModel.updateGeneralFilter)
                     
-                    EnumCell(isChecked: $isAnimeSelected, text: Category.anime.rawValue, onTap: updateAnimeFilter)
+                    EnumCell(isChecked: $viewModel.isAnimeSelected, text: Category.anime.rawValue, onTap: viewModel.updateAnimeFilter)
                    
       
                 } header: {
                     Text("Categories")
                 }
 
-                
 
                 Section {
-                    EnumCell(isChecked: $isNSFWSelected, upperCased: true, text: Purity.nsfw.rawValue, onTap: updateNSFWFilter)
+                    EnumCell(isChecked: $viewModel.isNSFWSelected, upperCased: true, text: Purity.nsfw.rawValue, onTap: viewModel.updateNSFWFilter)
                     
-                    EnumCell(isChecked: $isSFWSelected, upperCased: true, text: Purity.sfw.rawValue, onTap: updateSFWFilter)
+                    EnumCell(isChecked: $viewModel.isSFWSelected, upperCased: true, text: Purity.sfw.rawValue, onTap: viewModel.updateSFWFilter)
                     
-                    EnumCell(isChecked: $isSketchySelected, upperCased: true, text: Purity.sketchy.rawValue, onTap: updateSketchyFilter)
+                    EnumCell(isChecked: $viewModel.isSketchySelected, upperCased: true, text: Purity.sketchy.rawValue, onTap: viewModel.updateSketchyFilter)
                    
       
                 } header: {
@@ -73,12 +46,12 @@ struct FilterView: View {
                 
                 
                 Section {
-                    Picker("Sort By", selection: $configs.sorting) {
+                    Picker("Sort By", selection: $viewModel.configs.sorting) {
                         ForEach(Sorting.allCases, id: \.self) { sort in
                             Text(sort.rawValue).tag(sort)
                         }
                     }
-                    Picker("Order By", selection: $configs.order) {
+                    Picker("Order By", selection: $viewModel.configs.order) {
                         ForEach(Order.allCases, id: \.self) { order in
                             Text(order.rawValue).tag(order)
                         }
@@ -87,9 +60,8 @@ struct FilterView: View {
                     Text("Choose the top range of which the wallpapers would be sorted in by")
                 }
                 
-                
                 Section {
-                    Picker("Top Range", selection: $configs.topRange) {
+                    Picker("Top Range", selection: $viewModel.configs.topRange) {
                         ForEach(TopRange.allCases, id: \.self) { range in
                             Text(range.rawValue).tag(range)
                         }
@@ -98,17 +70,16 @@ struct FilterView: View {
                     Text("Choose the sort by and ordering")
                 }
                    
-                VStack(alignment: .center) {
-                    Button("Reset All") {
-                        configs.resetFilters()
-                    }
+                Group {
+                    Button("Reset All") { viewModel.configs.resetFilters() }
                     .buttonStyle(.borderedProminent)
                     .bold()
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 }
             }
-            .onAppear(perform: {
-                configureFilterValues()
-            })
+            .onAppear(perform: { viewModel.configureFilterValues() })
             .navigationTitle("Filters")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -155,34 +126,4 @@ struct EnumCell: View {
 }
 
 
-extension FilterView {
-    private func updateSFWFilter() {
-        isSFWSelected.toggle()
-        configs.setSFWSelected(isSFWSelected)
-    }
 
-    private func updateNSFWFilter() {
-        isNSFWSelected.toggle()
-        configs.setNSFWSelected(isNSFWSelected)
-    }
-
-    private func updateSketchyFilter() {
-        isSketchySelected.toggle()
-        configs.setSketchySelected(isSketchySelected)
-    }
-
-    private func updatePeopleFilter() {
-        isPeopleSelected.toggle()
-        configs.setPeopleSelected(isPeopleSelected)
-    }
-
-    private func updateGeneralFilter() {
-        isGeneralSelected.toggle()
-        configs.setGeneralSelected(isGeneralSelected)
-    }
-
-    private func updateAnimeFilter() {
-        isAnimeSelected.toggle()
-        configs.setAnimeSelected(isAnimeSelected)
-    }
-}

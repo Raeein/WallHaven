@@ -8,6 +8,7 @@ struct SearchView: View {
     @State private var isSearchBarPresented = true
     @State private var showWallpapers = false
     @State private var showFilterSheet = false
+    @State var refreshWallpapers = false
     
     @StateObject private var configs = WallpaperConfigs()
     
@@ -49,7 +50,7 @@ struct SearchView: View {
         NavigationStack {
             Group {
                 if showWallpapers {
-                    ImageGridView(configs: configs)
+                    ImageGridView(configs: configs, refreshWallpapers: $refreshWallpapers)
                 } else {
                     VStack(alignment: .leading) {
                         List {
@@ -113,8 +114,8 @@ struct SearchView: View {
 }
 
 struct SearchView_Previews: PreviewProvider {
+    @State static var refreshWallpapers = false // State variable for the binding
     static var previews: some View {
-        SearchView()
-            .modelContainer(for: SearchItem.self, inMemory: true)
+        SearchView() // needs binding
     }
 }
